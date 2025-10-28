@@ -1,4 +1,4 @@
-# music_app
+# instargram
 
 A new Flutter project.
 

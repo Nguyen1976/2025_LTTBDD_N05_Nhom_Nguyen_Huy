@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:instargram/bottomnav.dart';
 import 'package:instargram/home.dart';
 import 'package:instargram/login.dart';
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Home(),
+      home: BottomNav(),
     );
   }
 }

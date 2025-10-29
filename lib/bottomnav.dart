@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/home.dart';
-import 'package:instargram/notification.dart';
-import 'package:instargram/profile.dart';
-import 'package:instargram/reels.dart';
-import 'package:instargram/search.dart';
+import 'package:instargram/screens/home.dart';
+import 'package:instargram/screens/notification.dart';
+import 'package:instargram/screens/profile.dart';
+import 'package:instargram/screens/reels.dart';
+import 'package:instargram/screens/search.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});

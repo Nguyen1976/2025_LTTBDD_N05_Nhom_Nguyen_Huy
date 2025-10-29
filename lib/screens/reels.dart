@@ -54,7 +54,10 @@ class _ReelsState extends State<Reels> with TickerProviderStateMixin {
         _videoControllers[index] = ctrl;
         await ctrl.initialize();
         ctrl.setLooping(true);
-        await ctrl.play();
+
+        //sẽ set play thằng page hiện tại thay vì luôn set play khi video init xong gây ra lỗi nhiều video cùng play 1 lúc
+        // await ctrl.play();
+        await _videoControllers[_currentPage]!.play();
 
         if (mounted) setState(() {});
       } catch (e) {

@@ -14,15 +14,18 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int myIndex = 0;
-
   List<Widget> widgetList = [
+    // ignore: prefer_const_constructors
     Home(),
+    // ignore: prefer_const_constructors
     Search(),
+    // ignore: prefer_const_constructors
     Reels(),
+    // ignore: prefer_const_constructors
     NotificationPage(),
+    // ignore: prefer_const_constructors
     Profile(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_outlined),
-            label: 'Notification',
+            label: 'Notifications',
             activeIcon: Icon(Icons.notifications),
           ),
           BottomNavigationBarItem(
@@ -67,6 +70,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
         ],
       ),
+      body: Center(child: widgetList[myIndex]),
     );
   }
 }

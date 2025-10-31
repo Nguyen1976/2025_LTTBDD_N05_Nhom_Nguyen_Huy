@@ -204,82 +204,98 @@ class _ProfileState extends State<Profile> {
 
               // horizontal suggestion cards
               SizedBox(
+                height: 220,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: _suggestions.length,
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
                   itemBuilder: (context, index) {
                     final s = _suggestions[index];
-                    return IntrinsicHeight(
-                      // 👈 thêm dòng này nếu muốn đảm bảo chiều cao đều
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        decoration: BoxDecoration(
-                          color: cardBg,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.close,
-                                  size: 16,
-                                  color: Colors.white54,
-                                ),
+                    return Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      decoration: BoxDecoration(
+                        color: cardBg,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.close,
+                                size: 16,
+                                color: Colors.white54,
                               ),
                             ),
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(s.avatar),
+                          ),
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(s.avatar),
+                          ),
+                          const SizedBox(height: 8),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6.0,
                             ),
-                            const SizedBox(height: 8),
-                            Text(
+                            child: Text(
                               s.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              s.subtitle,
-                              maxLines: 2,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6.0,
+                            ),
+                            child: Text(
+                              s.subtitle,
                               style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
                               ),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            const Spacer(),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                minimumSize: const Size.fromHeight(
-                                  36,
-                                ), // đảm bảo nút đều
+                          ),
+                          const Spacer(),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              child: const Text('Theo dõi'),
                             ),
-                          ],
-                        ),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12.0,
+                                vertical: 0,
+                              ),
+                              child: Text(
+                                'Theo dõi',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
                 ),
               ),
-
               const SizedBox(height: 18),
 
               Row(
@@ -368,19 +384,24 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget _statColumn(String count, String label) {
-    return Column(
-      children: [
-        Text(
-          count,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
+    return Flexible(
+      child: FittedBox(
+        fit: BoxFit.scaleDown, // 👈 tự co lại nếu không đủ chỗ
+        child: Column(
+          children: [
+            Text(
+              count,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(label, style: const TextStyle(color: Colors.white70)),
+          ],
         ),
-        const SizedBox(height: 6),
-        Text(label, style: TextStyle(color: Colors.white70)),
-      ],
+      ),
     );
   }
 

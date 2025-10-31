@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instargram/screens/home.dart';
 import 'package:instargram/screens/notification.dart';
 import 'package:instargram/screens/profile.dart';
-import 'package:instargram/screens/reels.dart';
+import 'package:instargram/screens/reels/reels_screen.dart';
 import 'package:instargram/screens/search.dart';
 
 class BottomNav extends StatefulWidget {

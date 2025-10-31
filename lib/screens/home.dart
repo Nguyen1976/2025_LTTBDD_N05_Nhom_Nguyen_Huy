@@ -10,9 +10,130 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool isLiked = false;
-  final PageController _pageController = PageController();
-  int likeCount = 15200;
+  final List<Post> posts = [
+    Post(
+      username: 'geewonii',
+      avatar: 'images/avatar1.jpg',
+      images: ['images/post1.jpg', 'images/post2.jpg', 'images/post3.jpg'],
+      likeCount: 15200,
+      caption: '📸 ',
+      commentUser: 'duchuy',
+      commentText: 'Love❤️💕',
+      date: 'Ngày 7 tháng 4, 2025',
+    ),
+    Post(
+      username: 'duchuy',
+      avatar: 'images/avatar2.jpg',
+      images: ['images/photo5.JPG', 'images/photo6.JPG', 'images/t4.jpg'],
+      likeCount: 8900,
+      caption: 'Chill vibes 🌿',
+      commentUser: 'geewonii',
+      commentText: 'Love these pictures 💕',
+      date: 'Ngày 31 tháng 10, 2025',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 5,
+        shadowColor: Colors.black.withOpacity(0.8),
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
+        leading: const Icon(Icons.camera_alt_outlined, size: 35.0),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Message()),
+                );
+              },
+              child: Image.asset(
+                "images/message.png",
+                fit: BoxFit.cover,
+                width: 35.0,
+                height: 35.0,
+              ),
+            ),
+          ),
+        ],
+        title: const Center(
+          child: Text(
+            "Instagram",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 40.0,
+              fontFamily: 'GreatVibes',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
+
+      body: ListView.builder(
+        itemCount: posts.length,
+        padding: const EdgeInsets.only(top: 10.0),
+        itemBuilder: (context, index) {
+          final post = posts[index];
+          return PostWidget(post: post);
+        },
+      ),
+    );
+  }
+}
+
+class Post {
+  final String username;
+  final String avatar;
+  final List<String> images;
+  int likeCount;
+  bool isLiked;
+  final String caption;
+  final String commentUser;
+  final String commentText;
+  final String date;
+
+  Post({
+    required this.username,
+    required this.avatar,
+    required this.images,
+    required this.likeCount,
+    required this.caption,
+    required this.commentUser,
+    required this.commentText,
+    required this.date,
+    this.isLiked = false,
+  });
+}
+
+class PostWidget extends StatefulWidget {
+  final Post post;
+  const PostWidget({super.key, required this.post});
+
+  @override
+  State<PostWidget> createState() => _PostWidgetState();
+}
+
+class _PostWidgetState extends State<PostWidget> {
+  late final PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   String formatLikeCount(int count) {
     if (count >= 1000000) {
@@ -28,330 +149,151 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 5,
-        shadowColor: Colors.black.withOpacity(0.8),
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        leading: Icon(Icons.camera_alt_outlined, size: 35.0),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Message()),
-                );
-              },
-              child: Image.asset(
-                "images/message.png",
-                fit: BoxFit.cover,
-                width: 35.0,
-                height: 35.0,
-              ),
-            ),
-          ),
-        ],
-        title: Center(
-          child: Text(
-            "Instagram",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 40.0,
-              fontFamily: 'GreatVibes',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.only(top: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    final post = widget.post;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header: avatar + username
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+          child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Text(
-                  "Stories",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w500,
-                  ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image.asset(
+                  post.avatar,
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 5.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 70.0,
-                          height: 70.0,
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(40.0),
-                                child: Image.asset(
-                                  "images/boy1.png",
-                                  width: 70.0,
-                                  height: 70.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 45.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.white,
-                                          width: 1.0,
-                                        ),
-                                      ),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red, width: 2.0),
-                            shape: BoxShape.circle,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40.0),
-                            child: Image.asset(
-                              "images/boy1.png",
-                              width: 60.0,
-                              height: 60.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(width: 10.0),
-                        Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red, width: 2.0),
-                            shape: BoxShape.circle,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40.0),
-                            child: Image.asset(
-                              "images/boy1.png",
-                              width: 60.0,
-                              height: 60.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(width: 10.0),
-                        Container(
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red, width: 2.0),
-                            shape: BoxShape.circle,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40.0),
-                            child: Image.asset(
-                              "images/boy1.png",
-                              width: 60.0,
-                              height: 60.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Your Story",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30.0),
-                      child: Image.asset(
-                        "images/avatar1.jpg",
-                        height: 40,
-                        width: 40,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(width: 10.0),
-                    Text(
-                      "geewonii",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Column(
-                children: [
-                  Container(
-                    height: 400,
-                    child: PageView(
-                      controller: _pageController,
-                      children: [
-                        Image.asset("images/post1.jpg", fit: BoxFit.cover),
-                        Image.asset("images/post2.jpg", fit: BoxFit.cover),
-                        Image.asset("images/post3.jpg", fit: BoxFit.cover),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Center(
-                    child: SmoothPageIndicator(
-                      controller: _pageController,
-                      count: 3,
-                      effect: ExpandingDotsEffect(
-                        dotHeight: 8,
-                        dotWidth: 8,
-                        activeDotColor: Colors.blueAccent,
-                        dotColor: Colors.grey.shade400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10.0),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isLiked = !isLiked;
-                        if (isLiked) {
-                          likeCount++;
-                        } else {
-                          likeCount--;
-                        }
-                      });
-                    },
-                    child: Icon(
-                      isLiked ? Icons.favorite : Icons.favorite_border_outlined,
-                      color: isLiked ? Colors.red : Colors.black,
-                      size: 30.0,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    formatLikeCount(likeCount),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(width: 10.0),
-                  Icon(Icons.chat_bubble_outline, size: 30.0),
-                  SizedBox(width: 10.0),
-                  Image.asset('images/send.gif', width: 30.0, height: 30.0),
-                  Spacer(),
-                  Icon(Icons.bookmark_border, size: 30.0),
-                ],
-              ),
-              SizedBox(height: 15.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30.0),
-                      child: Image.asset(
-                        "images/boy1.png",
-                        height: 30,
-                        width: 30,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Text("  Liked by "),
-                    Text(
-                      "Duchuy",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(" and "),
-                    Text(
-                      ' others',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 5.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'geewonii ',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    Text('📸'),
-                    Text(
-                      '  ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 5.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text("View all 1,150 comments"),
-              ),
-              SizedBox(height: 5.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  "ngày 2 tháng 12, 2024",
-                  style: TextStyle(color: Colors.grey),
+              const SizedBox(width: 10.0),
+              Text(
+                post.username,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],
           ),
         ),
-      ),
+
+        // PageView ảnh
+        Container(
+          height: 400,
+          color: const Color(0xFF111111),
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (p) => setState(() => _currentPage = p),
+            children: post.images.map((img) {
+              return Image.asset(img, fit: BoxFit.cover);
+            }).toList(),
+          ),
+        ),
+
+        // Dấu chấm
+        if (post.images.length > 1) ...[
+          const SizedBox(height: 8),
+          Center(
+            child: SmoothPageIndicator(
+              controller: _pageController,
+              count: post.images.length,
+              effect: ExpandingDotsEffect(
+                dotHeight: 8,
+                dotWidth: 8,
+                activeDotColor: Colors.blueAccent,
+                dotColor: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ],
+
+        const SizedBox(height: 10.0),
+
+        // Like, comment, send icon
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    post.isLiked = !post.isLiked;
+                    post.likeCount += post.isLiked ? 1 : -1;
+                  });
+                },
+                child: Icon(
+                  post.isLiked
+                      ? Icons.favorite
+                      : Icons.favorite_border_outlined,
+                  color: post.isLiked ? Colors.red : Colors.black,
+                  size: 30.0,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                formatLikeCount(post.likeCount),
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Icon(Icons.chat_bubble_outline, size: 30.0),
+              const SizedBox(width: 12),
+              Image.asset('images/send.gif', width: 30.0, height: 30.0),
+              const Spacer(),
+              const Icon(Icons.bookmark_border, size: 30.0),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 12),
+
+        // Caption + Comment + Date
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Caption
+              Row(
+                children: [
+                  Text(
+                    '${post.username} ',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Expanded(
+                    child: Text(post.caption, overflow: TextOverflow.ellipsis),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5.0),
+
+              // Comment
+              Row(
+                children: [
+                  Text(
+                    '${post.commentUser} ',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(post.commentText),
+                ],
+              ),
+
+              const SizedBox(height: 5.0),
+              Text(
+                post.date,
+                style: const TextStyle(color: Colors.grey, fontSize: 12.0),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 }

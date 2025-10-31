@@ -12,6 +12,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isLiked = false;
   final PageController _pageController = PageController();
+  int likeCount = 15200;
+
+  String formatLikeCount(int count) {
+    if (count >= 1000000) {
+      return '${(count / 1000000).toStringAsFixed(1)}M';
+    } else if (count >= 1000) {
+      String value = (count / 1000).toStringAsFixed(1);
+      if (value.endsWith('.0')) value = value.substring(0, value.length - 2);
+      return '${value}K';
+    } else {
+      return count.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,12 +259,25 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       setState(() {
                         isLiked = !isLiked;
+                        if (isLiked) {
+                          likeCount++;
+                        } else {
+                          likeCount--;
+                        }
                       });
                     },
                     child: Icon(
                       isLiked ? Icons.favorite : Icons.favorite_border_outlined,
                       color: isLiked ? Colors.red : Colors.black,
                       size: 30.0,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    formatLikeCount(likeCount),
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(width: 10.0),
@@ -283,7 +309,7 @@ class _HomeState extends State<Home> {
                     ),
                     Text(" and "),
                     Text(
-                      ' 75k others',
+                      ' others',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],

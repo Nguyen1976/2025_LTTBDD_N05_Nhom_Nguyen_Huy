@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instargram/message.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -8,6 +10,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool isLiked = false;
+  final PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +26,20 @@ class _HomeState extends State<Home> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
-            child: Image.asset("images/send.gif", fit: BoxFit.cover),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Message()),
+                );
+              },
+              child: Image.asset(
+                "images/message.png",
+                fit: BoxFit.cover,
+                width: 35.0,
+                height: 35.0,
+              ),
+            ),
           ),
         ],
         title: Center(
@@ -174,7 +192,7 @@ class _HomeState extends State<Home> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(30.0),
                       child: Image.asset(
-                        "images/boy1.png",
+                        "images/avatar1.jpg",
                         height: 40,
                         width: 40,
                         fit: BoxFit.cover,
@@ -182,7 +200,7 @@ class _HomeState extends State<Home> {
                     ),
                     SizedBox(width: 10.0),
                     Text(
-                      "Rohit Sharma",
+                      "geewonii",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,
@@ -193,15 +211,49 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SizedBox(height: 10.0),
-              Image.asset(
-                "images/post.png",
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              Column(
+                children: [
+                  Container(
+                    height: 400,
+                    child: PageView(
+                      controller: _pageController,
+                      children: [
+                        Image.asset("images/post1.jpg", fit: BoxFit.cover),
+                        Image.asset("images/post2.jpg", fit: BoxFit.cover),
+                        Image.asset("images/post3.jpg", fit: BoxFit.cover),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: SmoothPageIndicator(
+                      controller: _pageController,
+                      count: 3,
+                      effect: ExpandingDotsEffect(
+                        dotHeight: 8,
+                        dotWidth: 8,
+                        activeDotColor: Colors.blueAccent,
+                        dotColor: Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 10.0),
               Row(
                 children: [
-                  Icon(Icons.favorite_border_outlined, size: 30.0),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                    },
+                    child: Icon(
+                      isLiked ? Icons.favorite : Icons.favorite_border_outlined,
+                      color: isLiked ? Colors.red : Colors.black,
+                      size: 30.0,
+                    ),
+                  ),
                   SizedBox(width: 10.0),
                   Icon(Icons.chat_bubble_outline, size: 30.0),
                   SizedBox(width: 10.0),
@@ -226,7 +278,7 @@ class _HomeState extends State<Home> {
                     ),
                     Text("  Liked by "),
                     Text(
-                      "Virat",
+                      "Duchuy",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(" and "),
@@ -243,12 +295,12 @@ class _HomeState extends State<Home> {
                 child: Row(
                   children: [
                     Text(
-                      'Rohit Sharma: ',
+                      'geewonii ',
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    Text('Living my dream'),
+                    Text('📸'),
                     Text(
-                      ' #VIETNAM #CRICKET',
+                      '  ',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Colors.blue,
@@ -261,6 +313,14 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Text("View all 1,150 comments"),
+              ),
+              SizedBox(height: 5.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "ngày 2 tháng 12, 2024",
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
             ],
           ),

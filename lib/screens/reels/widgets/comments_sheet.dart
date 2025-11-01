@@ -28,7 +28,6 @@ class CommentsSheet extends StatelessWidget {
                 ),
               ),
 
-              // ... phần ListView và TextField bạn copy từ file cũ
               const SizedBox(height: 12),
 
               Expanded(
@@ -40,10 +39,10 @@ class CommentsSheet extends StatelessWidget {
                   itemCount: 6,
                   separatorBuilder: (_, __) => const SizedBox(height: 8),
                   itemBuilder: (context, idx) {
-                    final username = idx == 0 ? 'ykuoai62miyama' : 'user\$idx';
+                    final username = idx == 0 ? 'ykuoai62miyama' : 'user$idx';
                     final avatar = idx == 0
-                        ? 'https://i.pravatar.cc/50?img=5'
-                        : 'https://i.pravatar.cc/50?img=${idx + 10}';
+                        ? 'images/boy1.png'
+                        : 'images/boy1.png';
                     final text = idx == 0
                         ? '😍😍😍😍'
                         : (idx == 1
@@ -55,7 +54,7 @@ class CommentsSheet extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 18,
-                          backgroundImage: NetworkImage(avatar),
+                          backgroundImage: AssetImage(avatar),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -131,7 +130,7 @@ class CommentsSheet extends StatelessWidget {
                     );
                   },
                 ),
-              ), // bottom input row
+              ), 
               Container(
                 color: Colors.transparent,
                 padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),

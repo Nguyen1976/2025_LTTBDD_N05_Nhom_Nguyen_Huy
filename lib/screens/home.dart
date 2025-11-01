@@ -20,16 +20,20 @@ class _HomeState extends State<Home> {
       commentUser: 'duchuy',
       commentText: 'Love❤️💕',
       date: 'Ngày 7 tháng 4, 2025',
+      likedUsers: ['duchuy', 'skuukzky'],
+      likedAvatars: ['images/avatar2.jpg'],
     ),
     Post(
       username: 'duchuy',
       avatar: 'images/avatar2.jpg',
       images: ['images/photo5.JPG', 'images/photo6.JPG', 'images/t4.jpg'],
       likeCount: 8900,
-      caption: 'Chill vibes 🌿',
+      caption: '🌿',
       commentUser: 'geewonii',
       commentText: 'Love these pictures 💕',
       date: 'Ngày 31 tháng 10, 2025',
+      likedUsers: ['geewonii', 'skuukzky'],
+      likedAvatars: ['images/avatar1.jpg'],
     ),
   ];
 
@@ -77,7 +81,6 @@ class _HomeState extends State<Home> {
       body: ListView(
         padding: const EdgeInsets.only(top: 10.0),
         children: [
-          // ---------------- Stories Section ----------------
           SizedBox(
             height: 110,
             child: ListView(
@@ -92,14 +95,13 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          // ---------------- Posts Section ----------------
-          ...posts.map((post) => PostWidget(post: post)).toList(),
+          //Duyet ds post, tao PostWidget, sau do trai widget de hien thi ListView
+          ...posts.map((post) => PostWidget(post: post)),
         ],
       ),
     );
   }
 
-  // Hàm tạo Story (avatar tròn có gradient viền)
   Widget buildStory(String image, String username, {bool isYourStory = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -156,6 +158,8 @@ class Post {
   final String commentUser;
   final String commentText;
   final String date;
+  final List<String> likedUsers;
+  final List<String> likedAvatars;
 
   Post({
     required this.username,
@@ -167,6 +171,8 @@ class Post {
     required this.commentText,
     required this.date,
     this.isLiked = false,
+    this.likedUsers = const [],
+    this.likedAvatars = const [],
   });
 }
 
@@ -180,7 +186,7 @@ class PostWidget extends StatefulWidget {
 
 class _PostWidgetState extends State<PostWidget> {
   late final PageController _pageController;
-  int _currentPage = 0;
+  int _currentPage = 0; // ignore: unused_field
 
   @override
   void initState() {
@@ -213,7 +219,6 @@ class _PostWidgetState extends State<PostWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Header: avatar + username
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
           child: Row(
@@ -240,7 +245,6 @@ class _PostWidgetState extends State<PostWidget> {
           ),
         ),
 
-        // PageView ảnh
         Container(
           height: 400,
           color: const Color(0xFF111111),
@@ -253,7 +257,6 @@ class _PostWidgetState extends State<PostWidget> {
           ),
         ),
 
-        // Dấu chấm chỉ ảnh
         if (post.images.length > 1) ...[
           const SizedBox(height: 8),
           Center(
@@ -272,7 +275,6 @@ class _PostWidgetState extends State<PostWidget> {
 
         const SizedBox(height: 10.0),
 
-        // Like, comment, send icon
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Row(
@@ -311,14 +313,41 @@ class _PostWidgetState extends State<PostWidget> {
         ),
 
         const SizedBox(height: 12),
-
-        // Caption + Comment + Date
+        if (post.likedUsers.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 12,
+                  backgroundImage: AssetImage(post.likedAvatars.first),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
+                      children: [
+                        TextSpan(
+                          text: post.likedUsers.join(', '),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const TextSpan(text: ' và những người khác đã thích'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+        ],
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Caption
               Row(
                 children: [
                   Text(
@@ -326,13 +355,16 @@ class _PostWidgetState extends State<PostWidget> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Expanded(
-                    child: Text(post.caption, overflow: TextOverflow.ellipsis),
+                    child: Text(
+                      post.caption,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 5.0),
 
-              // Comment
               Row(
                 children: [
                   Text(

@@ -15,7 +15,7 @@ class _ProfileState extends State<Profile> {
       subtitle: i == 0
           ? 'Có _duchuyy74 và 2 người khác theo dõi'
           : 'Có _duchuyy74 và 2 người khác theo dõi',
-      avatar: 'https://i.pravatar.cc/150?img=${i + 10}',
+      avatar: 'https://picsum.photos/${i + 200}',
     ),
   );
 
@@ -23,8 +23,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final bg = const Color(0xFF0B0B0D);
-    final cardBg = const Color(0xFF161618);
+    final bg = Colors.white;
     return Scaffold(
       backgroundColor: bg,
       body: SafeArea(
@@ -42,13 +41,13 @@ class _ProfileState extends State<Profile> {
                         Text(
                           'nguyenn_535',
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Icon(Icons.arrow_drop_down, color: Colors.white),
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
                       ],
                     ),
                   ),
@@ -56,12 +55,12 @@ class _ProfileState extends State<Profile> {
                     children: const [
                       Icon(
                         Icons.currency_exchange_outlined,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 12),
-                      Icon(Icons.add_box_outlined, color: Colors.white),
+                      Icon(Icons.add_box_outlined, color: Colors.black),
                       SizedBox(width: 12),
-                      Icon(Icons.menu, color: Colors.white),
+                      Icon(Icons.menu, color: Colors.black),
                     ],
                   ),
                 ],
@@ -84,13 +83,13 @@ class _ProfileState extends State<Profile> {
                         bottom: 0,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.black,
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.black, width: 2),
                           ),
                           child: const Icon(
                             Icons.add,
-                            color: Colors.black,
+                            color: Colors.white,
                             size: 20,
                           ),
                         ),
@@ -100,7 +99,8 @@ class _ProfileState extends State<Profile> {
                   const SizedBox(width: 18),
                   Expanded(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         _statColumn('0', 'bài viết'),
                         _statColumn('20', 'người theo dõi'),
@@ -116,7 +116,7 @@ class _ProfileState extends State<Profile> {
               const Text(
                 'Nguyênn',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -126,20 +126,26 @@ class _ProfileState extends State<Profile> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () {},
+
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: cardBg,
+                        backgroundColor: Colors.grey[200],
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
+                        side: BorderSide.none,
                       ),
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 3),
                         child: Text(
                           'Chỉnh sửa',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 13,
+                          ),
                         ),
                       ),
                     ),
@@ -149,19 +155,24 @@ class _ProfileState extends State<Profile> {
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: cardBg,
+                        backgroundColor: Colors.grey[200],
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
+                        side: BorderSide.none,
                       ),
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 1),
                         child: Text(
                           'Chia sẻ trang cá nhân',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 13,
+                          ),
                         ),
                       ),
                     ),
@@ -169,11 +180,11 @@ class _ProfileState extends State<Profile> {
                   const SizedBox(width: 12),
                   Container(
                     decoration: BoxDecoration(
-                      color: cardBg,
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.all(8),
-                    child: const Icon(Icons.person_add, color: Colors.white),
+                    padding: const EdgeInsets.all(7),
+                    child: const Icon(Icons.person_add, color: Colors.black),
                   ),
                 ],
               ),
@@ -186,7 +197,7 @@ class _ProfileState extends State<Profile> {
                   const Text(
                     'Khám phá mọi người',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -195,7 +206,10 @@ class _ProfileState extends State<Profile> {
                     onPressed: () {},
                     child: Text(
                       'Xem tất cả',
-                      style: TextStyle(color: Colors.blue[400]),
+                      style: TextStyle(
+                        color: Colors.blue[400],
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -212,10 +226,11 @@ class _ProfileState extends State<Profile> {
                   itemBuilder: (context, index) {
                     final s = _suggestions[index];
                     return Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.48,
                       decoration: BoxDecoration(
-                        color: cardBg,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[100]!),
                       ),
                       padding: const EdgeInsets.all(12),
                       child: Column(
@@ -228,7 +243,7 @@ class _ProfileState extends State<Profile> {
                               child: const Icon(
                                 Icons.close,
                                 size: 16,
-                                color: Colors.white54,
+                                color: Colors.black45,
                               ),
                             ),
                           ),
@@ -244,8 +259,8 @@ class _ProfileState extends State<Profile> {
                             child: Text(
                               s.name,
                               style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -260,7 +275,7 @@ class _ProfileState extends State<Profile> {
                             child: Text(
                               s.subtitle,
                               style: const TextStyle(
-                                color: Colors.white70,
+                                color: Colors.black45,
                                 fontSize: 12,
                               ),
                               textAlign: TextAlign.center,
@@ -308,14 +323,14 @@ class _ProfileState extends State<Profile> {
                           Icon(
                             Icons.grid_on,
                             color: _selectedTab == 0
-                                ? Colors.white
-                                : Colors.white54,
+                                ? Colors.black
+                                : Colors.black38,
                           ),
                           const SizedBox(height: 6),
                           Container(
                             height: 2,
                             color: _selectedTab == 0
-                                ? Colors.white
+                                ? Colors.black
                                 : Colors.transparent,
                           ),
                         ],
@@ -330,14 +345,14 @@ class _ProfileState extends State<Profile> {
                           Icon(
                             Icons.video_collection_outlined,
                             color: _selectedTab == 1
-                                ? Colors.white
-                                : Colors.white54,
+                                ? Colors.black
+                                : Colors.black38,
                           ),
                           const SizedBox(height: 6),
                           Container(
                             height: 2,
                             color: _selectedTab == 1
-                                ? Colors.white
+                                ? Colors.black
                                 : Colors.transparent,
                           ),
                         ],
@@ -352,14 +367,14 @@ class _ProfileState extends State<Profile> {
                           Icon(
                             Icons.person_outline,
                             color: _selectedTab == 2
-                                ? Colors.white
-                                : Colors.white54,
+                                ? Colors.black
+                                : Colors.black38,
                           ),
                           const SizedBox(height: 6),
                           Container(
                             height: 2,
                             color: _selectedTab == 2
-                                ? Colors.white
+                                ? Colors.black
                                 : Colors.transparent,
                           ),
                         ],
@@ -384,23 +399,28 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget _statColumn(String count, String label) {
-    return Flexible(
-      child: FittedBox(
-        fit: BoxFit.scaleDown, // 👈 tự co lại nếu không đủ chỗ
-        child: Column(
-          children: [
-            Text(
-              count,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
+    return Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            count,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
-            const SizedBox(height: 6),
-            Text(label, style: const TextStyle(color: Colors.white70)),
-          ],
-        ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.black87),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }
@@ -415,7 +435,7 @@ class _ProfileState extends State<Profile> {
       physics: const NeverScrollableScrollPhysics(),
       childAspectRatio: 1,
       children: List.generate(itemCount, (i) {
-        final src = 'https://picsum.photos/seed/profile_grid_$i/400';
+        final src = 'https://picsum.photos/${i + 200}';
         return Container(
           color: const Color(0xFF1B1B1D),
           child: Image.network(
@@ -438,7 +458,7 @@ class _ProfileState extends State<Profile> {
       physics: const NeverScrollableScrollPhysics(),
       childAspectRatio: 1,
       children: List.generate(itemCount, (i) {
-        final src = 'https://picsum.photos/seed/profile_reel_$i/400/600';
+        final src = 'https://picsum.photos/${i + 200}';
         return Stack(
           fit: StackFit.expand,
           children: [

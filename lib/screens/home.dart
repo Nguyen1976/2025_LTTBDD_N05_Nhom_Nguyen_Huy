@@ -222,12 +222,14 @@ class Comment {
   final String username;
   final String time;
   final String content;
+  bool isLiked;
 
   Comment({
     required this.avatar,
     required this.username,
     required this.time,
     required this.content,
+    this.isLiked = false,
   });
 }
 
@@ -281,6 +283,7 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   late final PageController _pageController;
   int _currentPage = 0; // ignore: unused_field
+  final TextEditingController _commentController = TextEditingController();
 
   @override
   void initState() {
@@ -291,6 +294,7 @@ class _PostWidgetState extends State<PostWidget> {
   @override
   void dispose() {
     _pageController.dispose();
+    _commentController.dispose();
     super.dispose();
   }
 
@@ -347,32 +351,50 @@ class _PostWidgetState extends State<PostWidget> {
                     itemCount: post.comments.length,
                     itemBuilder: (context, index) {
                       final cmt = post.comments[index];
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: AssetImage(cmt.avatar),
-                          radius: 20,
-                        ),
-                        title: Row(
-                          children: [
-                            Text(
-                              cmt.username,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
+                      // bọc bằng StatefulBuilder và sd localSetState, để khi có thay đổi=> chỉ build lại th đó ko phải build lại toàn bo listcomment
+                      return StatefulBuilder(
+                        builder: (context, localSetState) {
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: AssetImage(cmt.avatar),
+                              radius: 20,
+                            ),
+                            title: Row(
+                              children: [
+                                Text(
+                                  cmt.username,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  cmt.time,
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            subtitle: Text(cmt.content),
+                            trailing: GestureDetector(
+                              onTap: () {
+                                localSetState(() {
+                                  cmt.isLiked = !cmt.isLiked;
+                                });
+                              },
+                              child: Icon(
+                                cmt.isLiked
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: cmt.isLiked ? Colors.red : Colors.grey,
+                                size: 20,
                               ),
                             ),
-                            const SizedBox(width: 6),
-                            Text(
-                              cmt.time,
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        subtitle: Text(cmt.content),
-                        trailing: const Icon(Icons.favorite_border, size: 20),
+                          );
+                        },
                       );
                     },
                   ),
@@ -397,15 +419,33 @@ class _PostWidgetState extends State<PostWidget> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: TextField(
-                            decoration: InputDecoration(
+                            controller: _commentController,
+                            decoration: const InputDecoration(
                               hintText: 'Thêm bình luận...',
                               border: InputBorder.none,
                             ),
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.emoji_emotions_outlined),
+                          onPressed: () {
+                            final text = _commentController.text.trim();
+                            if (text.isNotEmpty) {
+                              setState(() {
+                                final newComment = Comment(
+                                  avatar: 'images/boy1.png',
+                                  username: 'you',
+                                  time: 'Vừa xong',
+                                  content: text,
+                                );
+                                post.comments.add(newComment);
+                                post.cmtCount = post.comments.length;
+                              });
+
+                              _commentController.clear();
+                              FocusScope.of(context).unfocus();
+                            }
+                          },
+                          icon: const Icon(Icons.send, color: Colors.blue),
                         ),
                       ],
                     ),

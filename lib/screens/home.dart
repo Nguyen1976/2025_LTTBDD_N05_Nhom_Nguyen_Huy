@@ -26,6 +26,20 @@ class _HomeState extends State<Home> {
       cmtCount: 15200,
       shareCount: 7400,
       sendCount: 120000,
+      comments: [
+        Comment(
+          avatar: 'images/avatar1.jpg',
+          username: 'geewonii',
+          time: '2 giờ',
+          content: '❤️❤️❤️',
+        ),
+        Comment(
+          avatar: 'images/avatar2.jpg',
+          username: 'duchuy',
+          time: '1 giờ',
+          content: '🔥🔥',
+        ),
+      ],
     ),
     Post(
       username: 'duchuy',
@@ -41,6 +55,20 @@ class _HomeState extends State<Home> {
       cmtCount: 200,
       shareCount: 70,
       sendCount: 10,
+      comments: [
+        Comment(
+          avatar: 'images/avatar1.jpg',
+          username: 'geewonii',
+          time: '2 giờ',
+          content: '❤️❤️❤️',
+        ),
+        Comment(
+          avatar: 'images/avatar3.jpg',
+          username: 'skuukzky',
+          time: '1 giờ',
+          content: '🔥🔥',
+        ),
+      ],
     ),
   ];
 
@@ -189,6 +217,20 @@ class _HomeState extends State<Home> {
   }
 }
 
+class Comment {
+  final String avatar;
+  final String username;
+  final String time;
+  final String content;
+
+  Comment({
+    required this.avatar,
+    required this.username,
+    required this.time,
+    required this.content,
+  });
+}
+
 class Post {
   final String username;
   final String avatar;
@@ -206,6 +248,8 @@ class Post {
   int shareCount;
   int sendCount;
 
+  List<Comment> comments;
+
   Post({
     required this.username,
     required this.avatar,
@@ -222,6 +266,7 @@ class Post {
     this.cmtCount = 0,
     this.shareCount = 0,
     this.sendCount = 0,
+    this.comments = const [],
   });
 }
 
@@ -259,6 +304,119 @@ class _PostWidgetState extends State<PostWidget> {
     } else {
       return count.toString();
     }
+  }
+
+  void showCommentsSheet(BuildContext context, Post post) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.75,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
+          builder: (context, ScrollController) {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Container(
+                    width: 50,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Bình luận',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+
+                Expanded(
+                  child: ListView.builder(
+                    controller: ScrollController,
+                    itemCount: post.comments.length,
+                    itemBuilder: (context, index) {
+                      final cmt = post.comments[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage(cmt.avatar),
+                          radius: 20,
+                        ),
+                        title: Row(
+                          children: [
+                            Text(
+                              cmt.username,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              cmt.time,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        subtitle: Text(cmt.content),
+                        trailing: const Icon(Icons.favorite_border, size: 20),
+                      );
+                    },
+                  ),
+                ),
+
+                //cmt
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border(top: BorderSide(color: Colors.grey[300]!)),
+                  ),
+                  child: SafeArea(
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage: AssetImage('images/boy1.png'),
+                          radius: 18,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Thêm bình luận...',
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.emoji_emotions_outlined),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -353,10 +511,25 @@ class _PostWidgetState extends State<PostWidget> {
               ),
               const SizedBox(width: 12),
               GestureDetector(
-                child: Image.asset(
-                  'images/comment.png',
-                  width: 30.0,
-                  height: 30.0,
+                onTap: () {
+                  showCommentsSheet(context, post);
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'images/comment.png',
+                      width: 30.0,
+                      height: 30.0,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      formatCount(post.cmtCount),
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(width: 12),

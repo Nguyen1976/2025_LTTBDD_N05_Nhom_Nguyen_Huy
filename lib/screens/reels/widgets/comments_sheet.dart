@@ -9,7 +9,7 @@ class CommentsSheet extends StatelessWidget {
       heightFactor: 0.6,
       child: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF1C1C1E),
+          color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
         ),
         child: SafeArea(
@@ -22,7 +22,7 @@ class CommentsSheet extends StatelessWidget {
               const Text(
                 'Bình luận',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -66,7 +66,7 @@ class CommentsSheet extends StatelessWidget {
                                   Text(
                                     username,
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -74,7 +74,7 @@ class CommentsSheet extends StatelessWidget {
                                   Text(
                                     '2 ngày',
                                     style: TextStyle(
-                                      color: Colors.white54,
+                                      color: Colors.black54,
                                       fontSize: 12,
                                     ),
                                   ),
@@ -83,7 +83,7 @@ class CommentsSheet extends StatelessWidget {
                               const SizedBox(height: 4),
                               Text(
                                 text,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.black),
                               ),
                               const SizedBox(height: 6),
                               Row(
@@ -91,7 +91,7 @@ class CommentsSheet extends StatelessWidget {
                                   Text(
                                     'Trả lời',
                                     style: TextStyle(
-                                      color: Colors.white54,
+                                      color: Colors.black54,
                                       fontSize: 13,
                                     ),
                                   ),
@@ -99,7 +99,7 @@ class CommentsSheet extends StatelessWidget {
                                   Text(
                                     'Xem bản dịch',
                                     style: TextStyle(
-                                      color: Colors.white54,
+                                      color: Colors.black54,
                                       fontSize: 13,
                                     ),
                                   ),
@@ -113,14 +113,14 @@ class CommentsSheet extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.favorite_border,
-                              color: Colors.white54,
+                              color: Colors.black54,
                               size: 20,
                             ),
                             const SizedBox(height: 6),
                             Text(
                               likes.toString(),
                               style: const TextStyle(
-                                color: Colors.white54,
+                                color: Colors.black54,
                                 fontSize: 12,
                               ),
                             ),
@@ -130,7 +130,7 @@ class CommentsSheet extends StatelessWidget {
                     );
                   },
                 ),
-              ), 
+              ),
               Container(
                 color: Colors.transparent,
                 padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
@@ -166,7 +166,7 @@ class CommentsSheet extends StatelessWidget {
                       children: [
                         const CircleAvatar(
                           radius: 18,
-                          backgroundColor: Colors.white,
+                          backgroundImage: AssetImage('images/boy1.png'),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -174,30 +174,54 @@ class CommentsSheet extends StatelessWidget {
                             height: 40,
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF2A2A2C),
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
-                              children: const [
+                              children: [
                                 Expanded(
                                   child: TextField(
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration.collapsed(
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: InputDecoration(
                                       hintText: 'Tham gia cuộc trò chuyện...',
-                                      hintStyle: TextStyle(
-                                        color: Colors.white54,
+                                      hintStyle: const TextStyle(
+                                        color: Colors.black54,
                                       ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 10,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          30,
+                                        ), // bo tròn viền
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                        ), // màu viền khi chưa focus
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          30,
+                                        ), // bo tròn khi focus
+                                        borderSide: BorderSide(
+                                          color: Colors.blue,
+                                        ), // màu viền khi focus
+                                      ),
+                                      filled: true, // có nền bên trong
+                                      fillColor: Colors.white, // màu nền
                                     ),
                                   ),
                                 ),
-                                Icon(
+
+                                const Icon(
                                   Icons.emoji_emotions_outlined,
-                                  color: Colors.white54,
+                                  color: Colors.black54,
                                 ),
-                                SizedBox(width: 8),
-                                Icon(
+                                const SizedBox(width: 8),
+                                const Icon(
                                   Icons.card_giftcard,
-                                  color: Colors.white54,
+                                  color: Colors.black54,
                                 ),
                               ],
                             ),
@@ -223,9 +247,9 @@ class _DragHandle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 40,
-      height: 4,
+      height: 2,
       decoration: BoxDecoration(
-        color: Colors.white24,
+        color: Colors.black54,
         borderRadius: BorderRadius.circular(4),
       ),
     );

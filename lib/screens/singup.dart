@@ -2,7 +2,7 @@
 // import 'package:authenticationapp/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/home.dart';
+import 'package:instargram/screens/home/home.dart';
 import 'package:instargram/screens/login.dart';
 
 class SignUp extends StatefulWidget {

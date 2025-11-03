@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/home.dart';
+import 'package:instargram/screens/home/home.dart';
 import 'package:instargram/screens/notification.dart';
 import 'package:instargram/screens/profile.dart';
 import 'package:instargram/screens/reels/reels_screen.dart';

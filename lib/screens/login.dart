@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram/screens/forgot_password.dart';
-import 'package:instargram/screens/home.dart';
+import 'package:instargram/screens/home/home.dart';
 import 'package:instargram/service/auth.dart';
 import 'package:instargram/screens/singup.dart';
 

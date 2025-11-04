@@ -104,7 +104,6 @@ class _NotificationPageState extends State<NotificationPage> {
         titleSpacing: 0,
         title: Row(
           children: const [
-            Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 22),
             SizedBox(width: 8),
             Text(
               'nguyenn_535',

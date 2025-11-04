@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instargram/screens/home/models/post.dart';
 import 'package:instargram/screens/home/widgets/comment_sheet.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:instargram/screens/home/widgets/video_post_widget.dart';
 
 class PostWidget extends StatefulWidget {
   final Post post;
@@ -76,22 +77,25 @@ class _PostWidgetState extends State<PostWidget> {
 
         Container(
           height: 400,
-          color: const Color(0xFF111111),
+          color: Colors.black,
           child: PageView(
             controller: _pageController,
             onPageChanged: (p) => setState(() => _currentPage = p),
-            children: post.images.map((img) {
-              return Image.asset(img, fit: BoxFit.cover);
-            }).toList(),
+            children: [
+              if (post.videoUrl != null)
+                VideoPostWidget(videoUrl: post.videoUrl!),
+
+              ...post.images.map((img) => Image.asset(img, fit: BoxFit.cover)),
+            ],
           ),
         ),
 
-        if (post.images.length > 1) ...[
+        if ((post.images.length + (post.videoUrl != null ? 1 : 0)) > 1) ...[
           const SizedBox(height: 8),
           Center(
             child: SmoothPageIndicator(
               controller: _pageController,
-              count: post.images.length,
+              count: post.images.length + (post.videoUrl != null ? 1 : 0),
               effect: ExpandingDotsEffect(
                 dotHeight: 8,
                 dotWidth: 8,

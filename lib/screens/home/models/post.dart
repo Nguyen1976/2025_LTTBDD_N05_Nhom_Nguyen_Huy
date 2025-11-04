@@ -17,6 +17,7 @@ class Post {
   int shareCount;
   int sendCount;
   List<Comment> comments;
+  final String? videoUrl;
 
   Post({
     required this.username,
@@ -35,5 +36,6 @@ class Post {
     this.shareCount = 0,
     this.sendCount = 0,
     this.comments = const [],
+    this.videoUrl,
   });
 }

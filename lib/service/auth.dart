@@ -56,4 +56,11 @@ class AuthMethods {
       print(e.toString());
     }
   }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+  }
 }

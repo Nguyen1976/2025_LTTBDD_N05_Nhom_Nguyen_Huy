@@ -1,5 +1,3 @@
-// import 'package:authenticationapp/home.dart';
-// import 'package:authenticationapp/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram/screens/home/home.dart';
@@ -71,107 +69,135 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset("images/car.PNG", fit: BoxFit.cover),
+              const SizedBox(height: 75),
+              Center(
+                child: Image.network(
+                  'https://img.icons8.com/3d-fluency/94/instagram-logo.png',
+                  height: 90,
+                  width: 90,
+                  fit: BoxFit.contain,
+                ),
               ),
-              SizedBox(height: 30.0),
+              const SizedBox(height: 75),
+
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: Form(
                   key: _formkey,
                   child: Column(
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 30.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Name';
-                            }
-                            return null;
-                          },
-                          controller: namecontroller,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Name",
-                            hintStyle: TextStyle(
-                              color: Color(0xFFb2b7bf),
-                              fontSize: 18.0,
+                      // Name
+                      TextFormField(
+                        controller: namecontroller,
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return 'Please Enter Name';
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Họ và tên',
+                          hintStyle: const TextStyle(color: Color(0xFF8b8f95)),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 18.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 30.0),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 30.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Email';
-                            }
-                            return null;
-                          },
-                          controller: mailcontroller,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Email",
-                            hintStyle: TextStyle(
-                              color: Color(0xFFb2b7bf),
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 30.0),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 30.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Password';
-                            }
-                            return null;
-                          },
-                          controller: passwordcontroller,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
+                      const SizedBox(height: 18),
 
-                            hintText: "Password",
-                            hintStyle: TextStyle(
-                              color: Color(0xFFb2b7bf),
-                              fontSize: 18.0,
+                      // Email
+                      TextFormField(
+                        controller: mailcontroller,
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return 'Please Enter Email';
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          hintStyle: const TextStyle(color: Color(0xFF8b8f95)),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 18.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
                             ),
                           ),
-                          obscureText: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                      const SizedBox(height: 18),
+
+                      // Password
+                      TextFormField(
+                        controller: passwordcontroller,
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return 'Please Enter Password';
+                          return null;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Mật khẩu',
+                          hintStyle: const TextStyle(color: Color(0xFF8b8f95)),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 18.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+
+                      // Primary action
                       GestureDetector(
                         onTap: () {
                           if (_formkey.currentState!.validate()) {
@@ -184,22 +210,19 @@ class _SignUpState extends State<SignUp> {
                           registration();
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 13.0,
-                            horizontal: 30.0,
-                          ),
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
                           decoration: BoxDecoration(
-                            color: Color(0xFF273671),
+                            color: const Color(0xFF1677FF),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
-                              "Sign Up",
+                              'Tạo tài khoản mới',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -209,65 +232,60 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              SizedBox(height: 40.0),
-              Text(
-                "or LogIn with",
-                style: TextStyle(
-                  color: Color(0xFF273671),
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 30.0),
+
+              const SizedBox(height: 28),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "images/google.png",
-                    height: 45,
-                    width: 45,
+                    'images/google.png',
+                    height: 42,
+                    width: 42,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(width: 30.0),
+                  const SizedBox(width: 30.0),
                   Image.asset(
-                    "images/apple1.png",
-                    height: 50,
-                    width: 50,
+                    'images/apple1.png',
+                    height: 44,
+                    width: 44,
                     fit: BoxFit.cover,
                   ),
                 ],
               ),
-              SizedBox(height: 40.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account?",
-                    style: TextStyle(
-                      color: Color(0xFF8c8e98),
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w500,
+
+              const SizedBox(height: 36),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Đã có tài khoản?',
+                      style: TextStyle(color: Color(0xFF6b6f74), fontSize: 16),
                     ),
-                  ),
-                  SizedBox(width: 5.0),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LogIn()),
-                      );
-                    },
-                    child: Text(
-                      "LogIn",
-                      style: TextStyle(
-                        color: Color(0xFF273671),
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
+                    const SizedBox(width: 6),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LogIn()),
+                        );
+                      },
+                      child: const Text(
+                        'Đăng nhập',
+                        style: TextStyle(
+                          color: Color(0xFF1677FF),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              const SizedBox(height: 24),
             ],
           ),
         ),

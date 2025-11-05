@@ -14,7 +14,10 @@ class AuthMethods {
   signInWithGoogle(BuildContext context) async {
     try {
       final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        clientId:
+            '1045018946545-n585djvtqi9tufrpi58odpcisg2cqoiq.apps.googleusercontent.com',
+      );
 
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn
           .signIn();
@@ -52,5 +55,12 @@ class AuthMethods {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
   }
 }

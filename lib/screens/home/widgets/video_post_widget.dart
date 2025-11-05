@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instargram/screens/reels/reels_screen.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPostWidget extends StatefulWidget {
@@ -11,7 +12,6 @@ class VideoPostWidget extends StatefulWidget {
 
 class _VideoPostWidgetState extends State<VideoPostWidget> {
   late VideoPlayerController _controller;
-  bool _isPlaying = false;
 
   @override
   void initState() {
@@ -21,7 +21,6 @@ class _VideoPostWidgetState extends State<VideoPostWidget> {
         setState(() {});
         _controller.setLooping(true);
         _controller.play();
-        _isPlaying = true;
       });
   }
 
@@ -31,22 +30,15 @@ class _VideoPostWidgetState extends State<VideoPostWidget> {
     super.dispose();
   }
 
-  void _togglePlayPause() {
-    setState(() {
-      if (_controller.value.isPlaying) {
-        _controller.pause();
-        _isPlaying = false;
-      } else {
-        _controller.play();
-        _isPlaying = true;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _togglePlayPause,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Reels()),
+        );
+      },
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -58,12 +50,6 @@ class _VideoPostWidgetState extends State<VideoPostWidget> {
                 ? VideoPlayer(_controller)
                 : const Center(child: CircularProgressIndicator()),
           ),
-          if (!_isPlaying)
-            const Icon(
-              Icons.play_circle_outline,
-              size: 80,
-              color: Colors.white70,
-            ),
         ],
       ),
     );

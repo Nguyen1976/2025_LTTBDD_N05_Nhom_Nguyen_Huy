@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instargram/screens/create_post.dart';
 import 'package:instargram/screens/home/home.dart';
 import 'package:instargram/screens/notification.dart';
 import 'package:instargram/screens/profile.dart';
@@ -20,9 +21,9 @@ class _BottomNavState extends State<BottomNav> {
     // ignore: prefer_const_constructors
     Search(),
     // ignore: prefer_const_constructors
-    Reels(),
+    CreatePostPage(),
     // ignore: prefer_const_constructors
-    NotificationPage(),
+    Reels(),
     // ignore: prefer_const_constructors
     Profile(),
   ];
@@ -54,14 +55,14 @@ class _BottomNavState extends State<BottomNav> {
             activeIcon: Icon(Icons.search),
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.add_box_outlined),
+            activeIcon: Icon(Icons.add_box),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.video_collection_outlined),
             label: 'Reels',
             activeIcon: Icon(Icons.video_collection),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            label: 'Notifications',
-            activeIcon: Icon(Icons.notifications),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),

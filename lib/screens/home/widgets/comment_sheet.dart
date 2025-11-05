@@ -27,7 +27,6 @@ void showCommentsSheet(
             builder: (context, setModalState) {
               return Column(
                 children: [
-                  // --- Thanh kéo nhỏ ở trên ---
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Container(

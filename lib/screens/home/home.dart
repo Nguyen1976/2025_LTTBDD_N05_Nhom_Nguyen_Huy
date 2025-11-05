@@ -109,70 +109,85 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 5,
-        shadowColor: Colors.black.withOpacity(0.8),
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Builder(
+          builder: (context) {
+            final width = MediaQuery.of(context).size.width;
+            final double titleFontSize = width < 350
+                ? 26
+                : (width < 500 ? 30 : 34);
+            final double iconSize = width < 350 ? 24 : 30;
+            final double paddingRight = width < 350 ? 6 : 12;
 
-        title: Row(
-          children: [
-            const Text(
-              "Instagram",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 34.0,
-                fontFamily: 'GreatVibes',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(width: 4),
-            const Icon(
-              Icons.keyboard_arrow_down,
-              color: Colors.black,
-              size: 28.0,
-            ),
-          ],
-        ),
-
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NotificationPage(),
+            return AppBar(
+              elevation: 5,
+              shadowColor: Colors.black.withOpacity(0.8),
+              surfaceTintColor: Colors.white,
+              backgroundColor: Colors.white,
+              automaticallyImplyLeading: false,
+              centerTitle: false,
+              title: Row(
+                children: [
+                  Text(
+                    "Instagram",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: titleFontSize,
+                      fontFamily: 'GreatVibes',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                );
-              },
-              child: const Icon(
-                Icons.favorite_border,
-                color: Colors.black,
-                size: 32.0,
+                  const SizedBox(width: 2),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.black,
+                    size: iconSize + 2,
+                  ),
+                ],
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Message()),
-                );
-              },
-              child: Image.asset(
-                "images/message.png",
-                fit: BoxFit.cover,
-                width: 32.0,
-                height: 32.0,
-              ),
-            ),
-          ),
-        ],
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: paddingRight),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NotificationPage(),
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.favorite_border,
+                      color: Colors.black,
+                      size: iconSize + 4,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: paddingRight),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Message(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "images/message.png",
+                      fit: BoxFit.cover,
+                      width: iconSize + 2,
+                      height: iconSize + 2,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.only(top: 10.0),

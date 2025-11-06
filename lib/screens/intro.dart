@@ -29,23 +29,48 @@ class Intro extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: [
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
+
               const Text(
                 'Nhóm: 2025_LTTBDD_N05_Nhom_Nguyen_Huy',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Phân công công việc',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+
+              Card(
+                color: Colors.white,
+                elevation: 0.5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12.0,
+                    horizontal: 12.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Thông tin nhóm',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 8),
+                      Text('Nguyễn Hà Nguyên — MSV 23010310'),
+                      SizedBox(height: 6),
+                      Text('Hoàng Lê Đức Huy — MSV 000000'),
+                    ],
+                  ),
+                ),
               ),
+
               const SizedBox(height: 8),
 
-              // Simple text list: each line shows "Tên — Công việc"
+              const SizedBox(height: 8),
+
               Expanded(
                 child: Card(
                   color: Colors.white,
@@ -58,6 +83,10 @@ class Intro extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Text(
+                          'Phân công công việc',
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
                         for (final m in members) ...[
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram/screens/home/home.dart';
 import 'package:instargram/screens/login.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -30,7 +31,7 @@ class _SignUpState extends State<SignUp> {
           SnackBar(
             backgroundColor: Colors.green,
             content: Text(
-              "registered Successfully",
+              'info_registered_successfully'.tr(),
               style: TextStyle(fontSize: 20.0),
             ),
           ),
@@ -45,7 +46,7 @@ class _SignUpState extends State<SignUp> {
             SnackBar(
               backgroundColor: Colors.orangeAccent,
               content: Text(
-                "Password Provided is too Weak",
+                'err_weak_password'.tr(),
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
@@ -55,7 +56,7 @@ class _SignUpState extends State<SignUp> {
             SnackBar(
               backgroundColor: Colors.orangeAccent,
               content: Text(
-                "Account Already exists",
+                'err_account_exists'.tr(),
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
@@ -96,11 +97,11 @@ class _SignUpState extends State<SignUp> {
                         controller: namecontroller,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return 'Please Enter Name';
+                            return 'validator_required_name'.tr();
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Họ và tên',
+                          hintText: 'name_hint'.tr(),
                           hintStyle: const TextStyle(color: Color(0xFF8b8f95)),
                           filled: true,
                           fillColor: Colors.white,
@@ -131,11 +132,11 @@ class _SignUpState extends State<SignUp> {
                         controller: mailcontroller,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return 'Please Enter Email';
+                            return 'validator_required_email'.tr();
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'email_hint'.tr(),
                           hintStyle: const TextStyle(color: Color(0xFF8b8f95)),
                           filled: true,
                           fillColor: Colors.white,
@@ -166,12 +167,12 @@ class _SignUpState extends State<SignUp> {
                         controller: passwordcontroller,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return 'Please Enter Password';
+                            return 'validator_required_password'.tr();
                           return null;
                         },
                         obscureText: true,
                         decoration: InputDecoration(
-                          hintText: 'Mật khẩu',
+                          hintText: 'password_hint'.tr(),
                           hintStyle: const TextStyle(color: Color(0xFF8b8f95)),
                           filled: true,
                           fillColor: Colors.white,
@@ -216,10 +217,10 @@ class _SignUpState extends State<SignUp> {
                             color: const Color(0xFF1677FF),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'Tạo tài khoản mới',
-                              style: TextStyle(
+                              'create_account'.tr(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
@@ -261,9 +262,12 @@ class _SignUpState extends State<SignUp> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Đã có tài khoản?',
-                      style: TextStyle(color: Color(0xFF6b6f74), fontSize: 16),
+                    Text(
+                      'already_have_account'.tr(),
+                      style: const TextStyle(
+                        color: Color(0xFF6b6f74),
+                        fontSize: 16,
+                      ),
                     ),
                     const SizedBox(width: 6),
                     GestureDetector(
@@ -273,9 +277,9 @@ class _SignUpState extends State<SignUp> {
                           MaterialPageRoute(builder: (context) => LogIn()),
                         );
                       },
-                      child: const Text(
-                        'Đăng nhập',
-                        style: TextStyle(
+                      child: Text(
+                        'sign_in'.tr(),
+                        style: const TextStyle(
                           color: Color(0xFF1677FF),
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

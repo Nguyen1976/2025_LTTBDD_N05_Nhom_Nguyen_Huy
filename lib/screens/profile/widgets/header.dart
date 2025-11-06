@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instargram/service/auth.dart';
 import 'package:instargram/screens/login.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
@@ -45,9 +46,9 @@ class Header extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem<String>(
+                PopupMenuItem<String>(
                   value: 'logout',
-                  child: Text('Đăng xuất'),
+                  child: Text('logout'.tr()),
                 ),
               ],
             ),

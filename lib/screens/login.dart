@@ -6,6 +6,7 @@ import 'package:instargram/bottomnav.dart';
 import 'package:instargram/screens/forgot_password.dart';
 import 'package:instargram/service/auth.dart';
 import 'package:instargram/screens/singup.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -34,23 +35,21 @@ class _LogInState extends State<LogIn> {
         MaterialPageRoute(builder: (context) => BottomNav()),
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+      print(e.code);
+      if (e.code == 'too-many-requests') {
+        // show thông báo cho user
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('err_too_many_requests'.tr())));
+      } else if (e.code == 'invalid-credential') {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('err_invalid_credential'.tr())));
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.orangeAccent,
             content: Text(
-              "No User Found for that Email",
-              style: TextStyle(fontSize: 18.0),
-            ),
-          ),
-        );
-      } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "Wrong Password Provided by User",
-              style: TextStyle(fontSize: 18.0),
+              'err_other_error'.tr(namedArgs: {'error': e.message ?? ''}),
             ),
           ),
         );
@@ -90,12 +89,12 @@ class _LogInState extends State<LogIn> {
                         controller: mailcontroller,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Enter E-mail';
+                            return 'validator_required_email'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Tên người dùng, email/số di động',
+                          hintText: 'username_hint'.tr(),
                           hintStyle: const TextStyle(color: Colors.grey),
                           filled: true,
                           fillColor: Colors.white,
@@ -127,13 +126,13 @@ class _LogInState extends State<LogIn> {
                         controller: passwordcontroller,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Enter Password';
+                            return 'validator_required_password'.tr();
                           }
                           return null;
                         },
                         obscureText: true,
                         decoration: InputDecoration(
-                          hintText: 'Mật khẩu',
+                          hintText: 'password_hint'.tr(),
                           hintStyle: const TextStyle(color: Colors.grey),
                           filled: true,
                           fillColor: Colors.white,
@@ -162,14 +161,14 @@ class _LogInState extends State<LogIn> {
 
                       // Primary action button
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_formkey.currentState!.validate()) {
                             setState(() {
                               email = mailcontroller.text;
                               password = passwordcontroller.text;
                             });
                           }
-                          userLogin();
+                          await userLogin();
                         },
                         child: Container(
                           width: double.infinity,
@@ -178,9 +177,9 @@ class _LogInState extends State<LogIn> {
                             color: const Color(0xFF1677FF),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'Đăng nhập',
+                              'login'.tr(),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -202,9 +201,9 @@ class _LogInState extends State<LogIn> {
                             ),
                           );
                         },
-                        child: const Text(
-                          'Quên mật khẩu?',
-                          style: TextStyle(
+                        child: Text(
+                          'forgot_password'.tr(),
+                          style: const TextStyle(
                             color: Color(0xFF6b6f74),
                             fontSize: 16,
                           ),
@@ -262,10 +261,10 @@ class _LogInState extends State<LogIn> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Tạo tài khoản mới',
-                      style: TextStyle(
+                      'create_account'.tr(),
+                      style: const TextStyle(
                         color: Color(0xFF1677FF),
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -276,12 +275,15 @@ class _LogInState extends State<LogIn> {
               ),
 
               const SizedBox(height: 16),
-              const Center(
+              Center(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 8.0, bottom: 24.0),
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 24.0),
                   child: Text(
-                    'Meta',
-                    style: TextStyle(color: Color(0xFF8b8f95), fontSize: 14),
+                    'meta_label'.tr(),
+                    style: const TextStyle(
+                      color: Color(0xFF8b8f95),
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ),

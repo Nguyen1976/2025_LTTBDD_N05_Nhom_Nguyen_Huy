@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:instargram/mockdata/reels.dart';
 
-class CommentsSheet extends StatelessWidget {
+class CommentsSheet extends StatefulWidget {
   final List<dynamic> commentsList;
-  const CommentsSheet({super.key, required this.commentsList});
+
+  final String? reelId;
+  CommentsSheet({super.key, required this.commentsList, this.reelId});
+
+  @override
+  State<CommentsSheet> createState() => _CommentsSheetState();
+}
+
+class _CommentsSheetState extends State<CommentsSheet> {
+  final TextEditingController textCommentController = TextEditingController();
+
+  void reply() {
+    //find reel
+    final reel = reelItems.firstWhere((item) => item.id == widget.reelId);
+    //add comment
+    if (textCommentController.text.isNotEmpty) {
+      reel.commentsList.add({
+        'username': 'nguyenn_535',
+        'avatar': 'images/boy1.png',
+        'content': textCommentController.text,
+        'isLike': false,
+        'countLike': 0,
+      });
+
+      setState(() {
+        textCommentController.clear();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +67,10 @@ class CommentsSheet extends StatelessWidget {
                     horizontal: 12,
                     vertical: 8,
                   ),
-                  itemCount: commentsList.length,
+                  itemCount: widget.commentsList.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 8),
                   itemBuilder: (context, idx) {
-                    final comment = commentsList[idx];
+                    final comment = widget.commentsList[idx];
                     final like = comment['isLike'];
                     final countLike = comment['countLike'];
 
@@ -107,7 +136,7 @@ class CommentsSheet extends StatelessWidget {
                         const SizedBox(width: 8),
                         Column(
                           children: [
-                            (like
+                            (!like
                                 ? Icon(
                                     Icons.favorite_border,
                                     color: Colors.black54,
@@ -184,6 +213,7 @@ class CommentsSheet extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: TextField(
+                                    controller: textCommentController,
                                     style: const TextStyle(color: Colors.black),
                                     decoration: InputDecoration(
                                       hintText: 'comments_input_hint'.tr(),
@@ -196,35 +226,42 @@ class CommentsSheet extends StatelessWidget {
                                             vertical: 10,
                                           ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          30,
-                                        ), 
+                                        borderRadius: BorderRadius.circular(30),
                                         borderSide: const BorderSide(
                                           color: Colors.grey,
-                                        ), 
+                                        ),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          30,
-                                        ), 
+                                        borderRadius: BorderRadius.circular(30),
                                         borderSide: BorderSide(
                                           color: Colors.blue,
-                                        ), 
+                                        ),
                                       ),
                                       filled: true,
-                                      fillColor: Colors.white, 
+                                      fillColor: Colors.white,
                                     ),
                                   ),
                                 ),
 
-                                const Icon(
-                                  Icons.emoji_emotions_outlined,
-                                  color: Colors.black54,
-                                ),
                                 const SizedBox(width: 8),
-                                const Icon(
-                                  Icons.card_giftcard,
-                                  color: Colors.black54,
+
+                                ElevatedButton(
+                                  onPressed: () {
+                                    reply();
+                                  },
+                                  child: const Text(
+                                    'Reply',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),

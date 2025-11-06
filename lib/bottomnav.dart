@@ -28,6 +28,7 @@ class _BottomNavState extends State<BottomNav> {
     final widgetList = [
       Home(extraPosts: _posts),
       const Search(),
+      Container(),
       const Reels(),
       const Profile(),
     ];
@@ -44,7 +45,6 @@ class _BottomNavState extends State<BottomNav> {
         showUnselectedLabels: false,
         onTap: (index) async {
           if (index == 2) {
-            // ✅ Chỉ mở trang tạo bài viết khi bấm vào nút "Add"
             await Navigator.push(
               context,
               MaterialPageRoute(

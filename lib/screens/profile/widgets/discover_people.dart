@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/profile.dart';
+import 'package:instargram/screens/profile/models/suggest_user.dart';
 
 class DiscoverPeople extends StatelessWidget {
   DiscoverPeople({super.key});

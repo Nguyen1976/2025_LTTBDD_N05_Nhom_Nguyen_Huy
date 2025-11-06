@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:instargram/screens/reels/models/reel_item.dart';
+import 'package:instargram/mockdata/reels.dart';
 import 'package:instargram/screens/reels/widgets/reel_page.dart';
 import 'package:video_player/video_player.dart';
 
@@ -16,38 +16,16 @@ class _ReelsState extends State<Reels> with TickerProviderStateMixin {
   final Map<int, VideoPlayerController?> _videoControllers = {};
   int _currentPage = 0;
 
-  // Example data — replace with real data source (videoUrl/thumbnailUrl)
-  final List<ReelItem> _items = List.generate(
-    6,
-    (i) => ReelItem(
-      id: 'r\$i',
-      userName: 'user_name',
-      userAvatar: 'images/boy1.png',
-      caption: 'What goes up must come down ... #nature #travel #reel',
-      likes: (i + 1) * 188000,
-      comments: (i + 1) * 8514,
-      shares: (i + 1) * 7646,
-      sends: (i + 1) * 531000,
-      videoUrl: 'videos/1.mp4',
-      thumbnail: 'images/thumbnail.png',
-    ),
-  );
-
-  final Map<String, bool> _liked = {};
-
   @override
   void initState() {
     super.initState();
-    for (final it in _items) {
-      _liked[it.id] = false;
-    }
 
     _maybeInitVideoAt(0);
   }
 
   Future<void> _maybeInitVideoAt(int index) async {
-    if (index < 0 || index >= _items.length) return;
-    final item = _items[index];
+    if (index < 0 || index >= reelItems.length) return;
+    final item = reelItems[index];
     if (item.videoUrl == null) return;
     final existing = _videoControllers[index];
 
@@ -90,7 +68,7 @@ class _ReelsState extends State<Reels> with TickerProviderStateMixin {
             PageView.builder(
               controller: _pageController,
               scrollDirection: Axis.vertical,
-              itemCount: _items.length,
+              itemCount: reelItems.length,
               onPageChanged: (newPage) async {
                 final prev = _videoControllers[_currentPage];
                 if (prev != null && prev.value.isPlaying) {
@@ -102,12 +80,11 @@ class _ReelsState extends State<Reels> with TickerProviderStateMixin {
               },
               itemBuilder: (context, index) {
                 return ReelPage(
-                  item: _items[index],
-                  liked: _liked[_items[index].id] ?? false,
+                  item: reelItems[index],
+                  liked: reelItems[index].isLike,
                   onToggleLike: () {
                     setState(() {
-                      _liked[_items[index].id] =
-                          !(_liked[_items[index].id] ?? false);
+                      reelItems[index].isLike = !(reelItems[index].isLike);
                     });
                   },
                   videoController: _videoControllers[index],

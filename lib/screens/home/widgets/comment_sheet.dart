@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/post.dart';
-import '../models/comment.dart';
+import '../../../models/post.dart';
+import '../../../models/comment.dart';
 
 void showCommentsSheet(
   BuildContext context,

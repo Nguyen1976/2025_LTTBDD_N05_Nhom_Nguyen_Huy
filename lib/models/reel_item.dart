@@ -9,6 +9,8 @@ class ReelItem {
   final int sends;
   final String? videoUrl;
   final String? thumbnail;
+  bool isLike;
+  final List<dynamic> commentsList;
 
   ReelItem({
     required this.id,
@@ -21,5 +23,9 @@ class ReelItem {
     required this.sends,
     this.videoUrl,
     this.thumbnail,
+    this.isLike = false,
+    this.commentsList = const [],
   });
+
+  void operator [](String other) {}
 }

@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
               title: Row(
                 children: [
                   Text(
-                    "Instagram",
+                    "Flutter",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: titleFontSize,

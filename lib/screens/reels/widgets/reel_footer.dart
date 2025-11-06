@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:instargram/screens/reels/models/reel_item.dart';
+import 'package:instargram/models/reel_item.dart';
 
 class ReelFooter extends StatelessWidget {
   final ReelItem item;

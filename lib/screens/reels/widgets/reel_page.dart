@@ -5,7 +5,7 @@ import 'package:instargram/screens/reels/widgets/reel_footer.dart';
 import 'package:instargram/screens/reels/widgets/right_action_column.dart';
 import 'package:instargram/screens/reels/widgets/video_background.dart';
 import 'package:video_player/video_player.dart';
-import '../models/reel_item.dart';
+import '../../../models/reel_item.dart';
 
 class ReelPage extends StatefulWidget {
   final ReelItem item;
@@ -68,7 +68,7 @@ class _ReelPageState extends State<ReelPage>
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => const CommentsSheet(),
+      builder: (_) => CommentsSheet(commentsList: widget.item.commentsList),
     );
   }
 

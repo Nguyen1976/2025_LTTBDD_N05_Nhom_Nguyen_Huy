@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/home/models/comment.dart';
-import 'package:instargram/screens/home/models/post.dart';
+import 'package:instargram/models/comment.dart';
+import 'package:instargram/models/post.dart';
 
 class CreatePostPage extends StatefulWidget {
   final Function(Post)? onPostCreated;

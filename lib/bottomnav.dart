@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instargram/models/post.dart';
 import 'package:instargram/screens/create_post.dart';
 import 'package:instargram/screens/home/home.dart';
-import 'package:instargram/screens/home/models/post.dart';
 import 'package:instargram/screens/profile/profile.dart';
 import 'package:instargram/screens/reels/reels_screen.dart';
 import 'package:instargram/screens/search.dart';

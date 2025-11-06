@@ -42,6 +42,21 @@ class _PostWidgetState extends State<PostWidget> {
     }
   }
 
+  Widget _buildIconWithCount({
+    required Widget icon,
+    required int count,
+    required VoidCallback onTap,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        InkWell(onTap: onTap, child: icon),
+        const SizedBox(width: 2),
+        Text(formatCount(count), style: const TextStyle(fontSize: 12)),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final post = widget.post;
@@ -137,46 +152,73 @@ class _PostWidgetState extends State<PostWidget> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: padding),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    icon: Icon(
-                      post.isLiked
-                          ? Icons.favorite
-                          : Icons.favorite_border_outlined,
-                      color: post.isLiked ? Colors.red : Colors.black,
-                      size: iconSize,
+                  Flexible(
+                    flex: 3,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          _buildIconWithCount(
+                            icon: Icon(
+                              post.isLiked
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined,
+                              color: post.isLiked ? Colors.red : Colors.black,
+                              size: iconSize,
+                            ),
+                            count: post.likeCount,
+                            onTap: () {
+                              setState(() {
+                                post.isLiked = !post.isLiked;
+                                post.likeCount += post.isLiked ? 1 : -1;
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 10),
+                          _buildIconWithCount(
+                            icon: Image.asset(
+                              'images/comment.png',
+                              width: iconSize,
+                              height: iconSize,
+                            ),
+                            count: post.cmtCount,
+                            onTap: () {
+                              showCommentsSheet(
+                                context,
+                                post,
+                                onUpdated: () => setState(() {}),
+                              );
+                            },
+                          ),
+                          const SizedBox(width: 10),
+                          _buildIconWithCount(
+                            icon: Image.asset(
+                              'images/retweet.png',
+                              width: iconSize,
+                              height: iconSize,
+                            ),
+                            count: post.shareCount,
+                            onTap: () => setState(() => post.shareCount++),
+                          ),
+                          const SizedBox(width: 10),
+                          _buildIconWithCount(
+                            icon: Image.asset(
+                              'images/send.png',
+                              width: iconSize,
+                              height: iconSize,
+                            ),
+                            count: post.sendCount,
+                            onTap: () => setState(() => post.sendCount++),
+                          ),
+                        ],
+                      ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        post.isLiked = !post.isLiked;
-                        post.likeCount += post.isLiked ? 1 : -1;
-                      });
-                    },
                   ),
-                  SizedBox(width: 4),
-                  Text(formatCount(post.likeCount)),
 
-                  IconButton(
-                    icon: Image.asset('images/comment.png', width: iconSize),
-                    onPressed: () {
-                      showCommentsSheet(
-                        context,
-                        post,
-                        onUpdated: () => setState(() {}),
-                      );
-                    },
-                  ),
-                  SizedBox(width: 4),
-                  Text(formatCount(post.cmtCount)),
-
-                  IconButton(
-                    icon: Image.asset('images/retweet.png', width: iconSize),
-                    onPressed: () => setState(() => post.shareCount++),
-                  ),
-                  SizedBox(width: 4),
-                  Text(formatCount(post.shareCount)),
-
-                  const Spacer(),
+                  //bookmark
                   IconButton(
                     icon: Icon(
                       post.isBookmarked
@@ -202,42 +244,6 @@ class _PostWidgetState extends State<PostWidget> {
                 ],
               ),
             ),
-
-            // --- Lượt thích ---
-            if (post.likedUsers.isNotEmpty)
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: padding),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: baseWidth * 0.04,
-                      backgroundImage: AssetImage(post.likedAvatars.first),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: fontSize * 0.9,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: post.likedUsers.join(', '),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const TextSpan(
-                              text: ' và những người khác đã thích',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
 
             const SizedBox(height: 8),
 

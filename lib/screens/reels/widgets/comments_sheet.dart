@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CommentsSheet extends StatelessWidget {
   const CommentsSheet({super.key});
@@ -19,9 +20,9 @@ class CommentsSheet extends StatelessWidget {
               const SizedBox(height: 8),
               const _DragHandle(),
               const SizedBox(height: 12),
-              const Text(
-                'Bình luận',
-                style: TextStyle(
+              Text(
+                'comments_title'.tr(),
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -72,7 +73,7 @@ class CommentsSheet extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 8),
                                   Text(
-                                    '2 ngày',
+                                    'time_2_days'.tr(),
                                     style: TextStyle(
                                       color: Colors.black54,
                                       fontSize: 12,
@@ -89,7 +90,7 @@ class CommentsSheet extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    'Trả lời',
+                                    'comments_reply'.tr(),
                                     style: TextStyle(
                                       color: Colors.black54,
                                       fontSize: 13,
@@ -97,7 +98,7 @@ class CommentsSheet extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 12),
                                   Text(
-                                    'Xem bản dịch',
+                                    'comments_see_translation'.tr(),
                                     style: TextStyle(
                                       color: Colors.black54,
                                       fontSize: 13,
@@ -183,7 +184,7 @@ class CommentsSheet extends StatelessWidget {
                                   child: TextField(
                                     style: const TextStyle(color: Colors.black),
                                     decoration: InputDecoration(
-                                      hintText: 'Tham gia cuộc trò chuyện...',
+                                      hintText: 'comments_input_hint'.tr(),
                                       hintStyle: const TextStyle(
                                         color: Colors.black54,
                                       ),

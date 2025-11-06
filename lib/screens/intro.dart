@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instargram/main.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Intro extends StatelessWidget {
   const Intro({super.key});
@@ -22,7 +23,10 @@ class Intro extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('Intro', style: TextStyle(color: Colors.black)),
+        title: Text(
+          'group_label'.tr(),
+          style: const TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
         elevation: 0,
       ),
@@ -33,11 +37,34 @@ class Intro extends StatelessWidget {
             children: [
               const SizedBox(height: 12),
 
-              const Text(
-                'Nhóm: 2025_LTTBDD_N05_Nhom_Nguyen_Huy',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
+              // Language selector
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => context.setLocale(const Locale('vi')),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      elevation: 0,
+                      side: const BorderSide(color: Colors.black12),
+                    ),
+                    child: const Text('Tiếng Việt'),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton(
+                    onPressed: () => context.setLocale(const Locale('en')),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      elevation: 0,
+                      side: const BorderSide(color: Colors.black12),
+                    ),
+                    child: const Text('English'),
+                  ),
+                ],
               ),
+
               const SizedBox(height: 12),
 
               Card(
@@ -53,15 +80,15 @@ class Intro extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        'Thông tin nhóm',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        'group_info_title'.tr(),
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(height: 8),
-                      Text('Nguyễn Hà Nguyên — MSV 23010310'),
-                      SizedBox(height: 6),
-                      Text('Hoàng Lê Đức Huy — MSV 000000'),
+                      const SizedBox(height: 8),
+                      const Text('Nguyễn Hà Nguyên — MSV 23010310'),
+                      const SizedBox(height: 6),
+                      const Text('Hoàng Lê Đức Huy — MSV 000000'),
                     ],
                   ),
                 ),
@@ -83,9 +110,9 @@ class Intro extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Phân công công việc',
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                        Text(
+                          'assignments'.tr(),
+                          style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
                         for (final m in members) ...[
                           Padding(
@@ -119,9 +146,9 @@ class Intro extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text(
-                  'Tiếp tục',
-                  style: TextStyle(
+                child: Text(
+                  'continue'.tr(),
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,

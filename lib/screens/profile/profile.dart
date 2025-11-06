@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:instargram/screens/profile/widgets/discover_people.dart';
 import 'package:instargram/screens/profile/widgets/header.dart';
 import 'package:instargram/screens/profile/widgets/tabs.dart';
@@ -59,9 +60,9 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _statColumn('0', 'bài viết'),
-                        _statColumn('20', 'người theo dõi'),
-                        _statColumn('37', 'đang theo dõi'),
+                        _statColumn('0', 'profile_posts'.tr()),
+                        _statColumn('20', 'profile_followers'.tr()),
+                        _statColumn('37', 'profile_following'.tr()),
                       ],
                     ),
                   ),
@@ -91,13 +92,13 @@ class _ProfileState extends State<Profile> {
                         ),
                         side: BorderSide.none,
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 3),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 3),
                         child: Text(
-                          'Chỉnh sửa',
+                          'btn_edit'.tr(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                             fontSize: 13,
@@ -118,13 +119,13 @@ class _ProfileState extends State<Profile> {
                         ),
                         side: BorderSide.none,
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 1),
                         child: Text(
-                          'Chia sẻ trang cá nhân',
+                          'btn_share_profile'.tr(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                             fontSize: 13,

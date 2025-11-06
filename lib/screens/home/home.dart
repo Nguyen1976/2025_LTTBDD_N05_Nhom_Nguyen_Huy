@@ -14,6 +14,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final List<dynamic> posts2 = [
+    {
+      'username': 'geewonii',
+      'avatar': 'images/avatar1.jpg',
+      'likeCount': 15200,
+      'comments': [
+        {
+          'avatar': 'images/avatar1.jpg',
+          'username': 'geewonii',
+          'time': '2 giờ',
+        },
+      ],
+    },
+  ];
   final List<Post> posts = [
     Post(
       username: 'geewonii',

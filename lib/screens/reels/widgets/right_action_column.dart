@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/reels/models/reel_item.dart';
+import 'package:instargram/models/reel_item.dart';
 import 'right_icon.dart';
 
 class RightActionColumn extends StatelessWidget {

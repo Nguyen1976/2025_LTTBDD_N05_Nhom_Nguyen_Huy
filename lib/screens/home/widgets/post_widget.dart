@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/home/models/post.dart';
+import 'package:instargram/models/post.dart';
 import 'package:instargram/screens/home/widgets/comment_sheet.dart';
 import 'package:instargram/screens/home/widgets/video_post_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

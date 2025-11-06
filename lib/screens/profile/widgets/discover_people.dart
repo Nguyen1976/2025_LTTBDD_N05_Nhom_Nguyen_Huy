@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/profile/models/suggest_user.dart';
+import 'package:instargram/models/suggest_user.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class DiscoverPeople extends StatelessWidget {

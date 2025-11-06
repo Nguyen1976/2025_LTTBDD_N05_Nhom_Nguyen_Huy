@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class CommentsSheet extends StatelessWidget {
-  const CommentsSheet({super.key});
+  final List<dynamic> commentsList;
+  const CommentsSheet({super.key, required this.commentsList});
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +38,19 @@ class CommentsSheet extends StatelessWidget {
                     horizontal: 12,
                     vertical: 8,
                   ),
-                  itemCount: 6,
+                  itemCount: commentsList.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 8),
                   itemBuilder: (context, idx) {
-                    final username = idx == 0 ? 'ykuoai62miyama' : 'user$idx';
-                    final avatar = idx == 0
-                        ? 'images/boy1.png'
-                        : 'images/boy1.png';
-                    final text = idx == 0
-                        ? '😍😍😍😍'
-                        : (idx == 1
-                              ? 'Quién pudiera estar en lugar de la masajista'
-                              : 'Aí aí oxx33');
-                    final likes = idx == 1 ? 2 : 1;
+                    final comment = commentsList[idx];
+                    final like = comment['isLike'];
+                    final countLike = comment['countLike'];
+
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CircleAvatar(
                           radius: 18,
-                          backgroundImage: AssetImage(avatar),
+                          backgroundImage: AssetImage(comment['avatar']),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -65,7 +60,7 @@ class CommentsSheet extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    username,
+                                    comment['username'],
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -83,7 +78,7 @@ class CommentsSheet extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                text,
+                                comment['content'],
                                 style: const TextStyle(color: Colors.black),
                               ),
                               const SizedBox(height: 6),
@@ -112,14 +107,21 @@ class CommentsSheet extends StatelessWidget {
                         const SizedBox(width: 8),
                         Column(
                           children: [
-                            Icon(
-                              Icons.favorite_border,
-                              color: Colors.black54,
-                              size: 20,
-                            ),
+                            (like
+                                ? Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.black54,
+                                    size: 20,
+                                  )
+                                : Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 20,
+                                  )),
+
                             const SizedBox(height: 6),
                             Text(
-                              likes.toString(),
+                              countLike.toString(),
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 12,
@@ -196,21 +198,21 @@ class CommentsSheet extends StatelessWidget {
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
                                           30,
-                                        ), // bo tròn viền
+                                        ), 
                                         borderSide: const BorderSide(
                                           color: Colors.grey,
-                                        ), // màu viền khi chưa focus
+                                        ), 
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
                                           30,
-                                        ), // bo tròn khi focus
+                                        ), 
                                         borderSide: BorderSide(
                                           color: Colors.blue,
-                                        ), // màu viền khi focus
+                                        ), 
                                       ),
-                                      filled: true, // có nền bên trong
-                                      fillColor: Colors.white, // màu nền
+                                      filled: true,
+                                      fillColor: Colors.white, 
                                     ),
                                   ),
                                 ),

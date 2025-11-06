@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instargram/message.dart';
-import 'package:instargram/screens/home/models/comment.dart';
-import 'package:instargram/screens/home/models/post.dart';
+import 'package:instargram/models/comment.dart';
+import 'package:instargram/models/post.dart';
 import 'package:instargram/screens/home/widgets/post_widget.dart';
 import 'package:instargram/screens/home/widgets/story_widget.dart';
 import 'package:instargram/screens/notification.dart';

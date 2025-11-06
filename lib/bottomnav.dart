@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instargram/models/post.dart';
 import 'package:instargram/screens/create_post.dart';
 import 'package:instargram/screens/home/home.dart';
-import 'package:instargram/screens/notification.dart';
 import 'package:instargram/screens/profile/profile.dart';
 import 'package:instargram/screens/reels/reels_screen.dart';
 import 'package:instargram/screens/search.dart';
@@ -15,44 +15,58 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int myIndex = 0;
-  List<Widget> widgetList = [
-    // ignore: prefer_const_constructors
-    Home(),
-    // ignore: prefer_const_constructors
-    Search(),
-    // ignore: prefer_const_constructors
-    CreatePostPage(),
-    // ignore: prefer_const_constructors
-    Reels(),
-    // ignore: prefer_const_constructors
-    Profile(),
-  ];
+  final List<Post> _posts = [];
+
+  void _addPost(Post post) {
+    setState(() {
+      _posts.insert(0, post);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final widgetList = [
+      Home(extraPosts: _posts),
+      const Search(),
+      Container(),
+      const Reels(),
+      const Profile(),
+    ];
+
     return Scaffold(
+      body: Center(child: widgetList[myIndex]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: myIndex,
         selectedItemColor: Colors.black,
-        unselectedItemColor: Color(0xFF8c8e98),
+        unselectedItemColor: const Color(0xFF8c8e98),
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        onTap: (index) {
-          setState(() {
-            myIndex = index;
-          });
+        onTap: (index) async {
+          if (index == 2) {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreatePostPage(onPostCreated: _addPost),
+              ),
+            );
+          } else {
+            setState(() {
+              myIndex = index;
+            });
+          }
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
-            label: 'Home',
             activeIcon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_outlined),
-            label: 'Search',
             activeIcon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_box_outlined),
@@ -61,17 +75,16 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.video_collection_outlined),
-            label: 'Reels',
             activeIcon: Icon(Icons.video_collection),
+            label: 'Reels',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
-            label: 'Profile',
             activeIcon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
-      body: Center(child: widgetList[myIndex]),
     );
   }
 }

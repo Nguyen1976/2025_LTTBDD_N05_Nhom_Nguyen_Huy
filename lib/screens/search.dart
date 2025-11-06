@@ -10,6 +10,12 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final List<String> images = [
+    'images/post1.jpg',
+    'images/post2.jpg',
+    'images/post3.jpg',
+    'images/avatar1.jpg',
+    'images/avatar2.jpg',
+    'images/avatar3.jpg',
     'images/photo1.JPG',
     'images/photo2.JPG',
     'images/photo3.JPG',
@@ -17,7 +23,6 @@ class _SearchState extends State<Search> {
     'images/photo5.JPG',
     'images/photo6.JPG',
     'images/photo7.JPG',
-    'images/photo8.WEBP',
     'images/t4.jpg',
   ];
 

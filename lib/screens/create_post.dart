@@ -13,23 +13,32 @@ class CreatePostPage extends StatefulWidget {
 
 class _CreatePostPageState extends State<CreatePostPage> {
   final _captionController = TextEditingController();
-  String? _selectedImage;
+  final List<String> _selectedImages = [];
 
   final List<String> _imagePaths = [
     'images/post1.jpg',
     'images/post2.jpg',
     'images/post3.jpg',
-    'images/post4.jpg',
-    'images/post5.jpg',
+    'images/avatar1.jpg',
+    'images/avatar2.jpg',
+    'images/avatar3.jpg',
+    'images/photo1.JPG',
+    'images/photo2.JPG',
+    'images/photo3.JPG',
+    'images/photo4.JPG',
+    'images/photo5.JPG',
+    'images/photo6.JPG',
+    'images/photo7.JPG',
+    'images/t4.jpg',
   ];
 
   void _submit() {
-    if (_selectedImage == null) return;
+    if (_selectedImages.isEmpty) return;
 
     final newPost = Post(
-      username: 'geewonii',
-      avatar: 'images/avatar1.jpg',
-      images: [_selectedImage!],
+      username: 'Nguyênn',
+      avatar: 'images/boy1.png',
+      images: _selectedImages, // <-- danh sách ảnh
       likeCount: 0,
       caption: _captionController.text,
       commentUser: '',
@@ -41,7 +50,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     );
 
     widget.onPostCreated?.call(newPost);
-    Navigator.pop(context); // quay về home
+    Navigator.pop(context);
   }
 
   @override
@@ -62,16 +71,34 @@ class _CreatePostPageState extends State<CreatePostPage> {
       body: Column(
         children: [
           const SizedBox(height: 10),
-          // Hiển thị ảnh được chọn
-          _selectedImage != null
-              ? Image.asset(_selectedImage!, height: 200, fit: BoxFit.cover)
+          // Hiển thị các ảnh được chọn
+          _selectedImages.isNotEmpty
+              ? SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _selectedImages.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: Image.asset(
+                          _selectedImages[index],
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
+                )
               : Container(
                   height: 200,
                   color: Colors.grey[300],
                   child: const Center(child: Text("Chọn ảnh bên dưới")),
                 ),
           const SizedBox(height: 10),
-          // Grid ảnh để chọn
+
+          // Grid chọn ảnh
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(10),
@@ -83,17 +110,23 @@ class _CreatePostPageState extends State<CreatePostPage> {
               itemCount: _imagePaths.length,
               itemBuilder: (context, index) {
                 final path = _imagePaths[index];
+                final isSelected = _selectedImages.contains(path);
+
                 return GestureDetector(
                   onTap: () {
                     setState(() {
-                      _selectedImage = path;
+                      if (isSelected) {
+                        _selectedImages.remove(path);
+                      } else {
+                        _selectedImages.add(path);
+                      }
                     });
                   },
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
                       Image.asset(path, fit: BoxFit.cover),
-                      if (_selectedImage == path)
+                      if (isSelected)
                         Container(
                           color: Colors.black.withOpacity(0.4),
                           child: const Icon(
@@ -108,6 +141,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
               },
             ),
           ),
+
+          // Chú thích
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(

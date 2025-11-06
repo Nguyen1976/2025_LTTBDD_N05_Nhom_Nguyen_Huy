@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instargram/screens/profile.dart';
+import 'package:instargram/screens/profile/models/suggest_user.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DiscoverPeople extends StatelessWidget {
   DiscoverPeople({super.key});
@@ -20,9 +21,9 @@ class DiscoverPeople extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Khám phá mọi người',
-              style: TextStyle(
+            Text(
+              'discover_people_title'.tr(),
+              style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
@@ -31,7 +32,7 @@ class DiscoverPeople extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: Text(
-                'Xem tất cả',
+                'discover_see_all'.tr(),
                 style: TextStyle(
                   color: Colors.blue[400],
                   fontWeight: FontWeight.w600,
@@ -113,16 +114,16 @@ class DiscoverPeople extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 12.0,
                           vertical: 0,
                         ),
                         child: Text(
-                          'Theo dõi',
+                          'btn_follow'.tr(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:instargram/screens/reels/models/reel_item.dart';
 import 'package:instargram/screens/reels/widgets/reel_page.dart';
 import 'package:video_player/video_player.dart';
@@ -123,8 +124,8 @@ class _ReelsState extends State<Reels> with TickerProviderStateMixin {
                   Row(
                     children: [
                       Text(
-                        'Reels',
-                        style: TextStyle(
+                        'reels_title'.tr(),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -134,7 +135,7 @@ class _ReelsState extends State<Reels> with TickerProviderStateMixin {
                       Row(
                         children: [
                           Text(
-                            'Bạn bè',
+                            'reels_friends'.tr(),
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 18,

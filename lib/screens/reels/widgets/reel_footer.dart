@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:instargram/screens/reels/models/reel_item.dart';
 
 class ReelFooter extends StatelessWidget {
@@ -36,9 +37,9 @@ class ReelFooter extends StatelessWidget {
                   color: Colors.white24,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Text(
-                  'Theo dõi',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                child: Text(
+                  'btn_follow'.tr(),
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram/screens/singup.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -21,7 +22,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Password Reset Email has been sent !",
+            'info_password_reset_sent'.tr(),
             style: TextStyle(fontSize: 20.0),
           ),
         ),
@@ -31,7 +32,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              "No user found for that email.",
+              'err_no_user_found'.tr(),
               style: TextStyle(fontSize: 20.0),
             ),
           ),
@@ -88,7 +89,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please Enter Email';
+                              return 'validator_required_email'.tr();
                             }
                             return null;
                           },

@@ -68,7 +68,7 @@ class _ReelPageState extends State<ReelPage>
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => CommentsSheet(commentsList: widget.item.commentsList),
+      builder: (_) => CommentsSheet(commentsList: widget.item.commentsList, reelId: widget.item.id),
     );
   }
 

@@ -7,27 +7,28 @@ import 'package:instargram/screens/home/widgets/story_widget.dart';
 import 'package:instargram/screens/notification.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final List<Post> extraPosts;
+  const Home({super.key, this.extraPosts = const []});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final List<dynamic> posts2 = [
-    {
-      'username': 'geewonii',
-      'avatar': 'images/avatar1.jpg',
-      'likeCount': 15200,
-      'comments': [
-        {
-          'avatar': 'images/avatar1.jpg',
-          'username': 'geewonii',
-          'time': '2 giờ',
-        },
-      ],
-    },
-  ];
+  // final List<dynamic> posts2 = [
+  //   {
+  //     'username': 'geewonii',
+  //     'avatar': 'images/avatar1.jpg',
+  //     'likeCount': 15200,
+  //     'comments': [
+  //       {
+  //         'avatar': 'images/avatar1.jpg',
+  //         'username': 'geewonii',
+  //         'time': '2 giờ',
+  //       },
+  //     ],
+  //   },
+  // ];
   final List<Post> posts = [
     Post(
       username: 'geewonii',
@@ -121,6 +122,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final allPosts = [...widget.extraPosts, ...posts];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -225,7 +228,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           //Duyet ds post, tao PostWidget, sau do trai widget de hien thi ListView
-          ...posts.map((post) => PostWidget(post: post)),
+          ...allPosts.map((post) => PostWidget(post: post)),
         ],
       ),
     );

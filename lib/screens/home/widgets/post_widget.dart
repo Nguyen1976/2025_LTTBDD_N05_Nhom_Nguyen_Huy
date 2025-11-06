@@ -14,7 +14,7 @@ class PostWidget extends StatefulWidget {
 
 class _PostWidgetState extends State<PostWidget> {
   late final PageController _pageController;
-  int _currentPage = 0;
+  int _currentPage = 0; //ignore: unused_field
   final TextEditingController _commentController = TextEditingController();
 
   @override

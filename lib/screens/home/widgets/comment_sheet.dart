@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../models/post.dart';
 import '../../../models/comment.dart';
@@ -40,8 +41,8 @@ void showCommentsSheet(
                   ),
                   const SizedBox(height: 10),
 
-                  const Text(
-                    'Bình luận',
+                  Text(
+                    tr('comment'),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
@@ -122,8 +123,8 @@ void showCommentsSheet(
                           Expanded(
                             child: TextField(
                               controller: commentController,
-                              decoration: const InputDecoration(
-                                hintText: 'Thêm bình luận...',
+                              decoration: InputDecoration(
+                                hintText: tr('cmt_input'),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -135,7 +136,7 @@ void showCommentsSheet(
                                 final newComment = Comment(
                                   avatar: 'images/boy1.png',
                                   username: 'you',
-                                  time: 'Vừa xong',
+                                  time: tr('time_created'),
                                   content: text,
                                 );
 

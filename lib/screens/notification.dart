@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class NotificationItem {
@@ -126,7 +127,7 @@ class _NotificationPageState extends State<NotificationPage> {
             if (entry.key == '30 ngày qua') buildShowMoreButton(),
           ],
           const Divider(height: 30),
-          buildSectionTitle('Gợi ý cho bạn'),
+          buildSectionTitle(tr('suggest')),
           ...buildFriendSuggestions(),
         ],
       ),
@@ -169,7 +170,7 @@ class _NotificationPageState extends State<NotificationPage> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         ),
-        child: const Text('Theo dõi'),
+        child: Text(tr('btn_follow'), selectionColor: Colors.white),
       ),
     );
   }
@@ -187,7 +188,7 @@ class _NotificationPageState extends State<NotificationPage> {
           color: Colors.grey[700],
         ),
         label: Text(
-          showMore ? 'Ẩn bớt' : 'Xem thêm',
+          showMore ? tr('hide') : tr('show'),
           style: TextStyle(color: Colors.grey[700]),
         ),
       ),

@@ -40,5 +40,20 @@
   "group_info_title": "Thông tin nhóm",
   "logout": "Đăng xuất",
   "already_have_account": "Đã có tài khoản?",
-  "sign_in": "Đăng nhập"
+  "sign_in": "Đăng nhập",
+  "search": "Tìm kiếm",
+  "cancel": "Hủy",
+  "recently_search": "Tìm kiếm gần đây",
+  "create_post": "Tạo bài viết",
+  "share": "Đăng",
+  "select_img": "Chọn ảnh bên dưới",
+  "caption": "Viết chú thích...",
+  "comment": "Bình luận",
+  "cmt_input": "Thêm bình luận...",
+  "time_created": "Vừa xong",
+  "mark": "Đã lưu vào bộ sưu tập",
+  "unmark": "Đã xoá khỏi bộ sưu tập",
+  "suggest": "Gợi ý cho bạn",
+  "show": "Xem thêm",
+  "hide": "Ẩn bớt"
 }

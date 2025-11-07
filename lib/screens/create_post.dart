@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instargram/models/comment.dart';
 import 'package:instargram/models/post.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CreatePostPage extends StatefulWidget {
   final Function(Post)? onPostCreated;
@@ -38,7 +39,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     final newPost = Post(
       username: 'Nguyênn',
       avatar: 'images/boy1.png',
-      images: _selectedImages, // <-- danh sách ảnh
+      images: _selectedImages,
       likeCount: 0,
       caption: _captionController.text,
       commentUser: '',
@@ -57,12 +58,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tạo bài viết"),
+        title: Text(tr('create_post')),
         actions: [
           TextButton(
             onPressed: _submit,
-            child: const Text(
-              "Đăng",
+            child: Text(
+              tr('share'),
               style: TextStyle(color: Colors.blue, fontSize: 18),
             ),
           ),
@@ -94,7 +95,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
               : Container(
                   height: 200,
                   color: Colors.grey[300],
-                  child: const Center(child: Text("Chọn ảnh bên dưới")),
+                  child: Center(child: Text(tr('select_img'))),
                 ),
           const SizedBox(height: 10),
 
@@ -144,11 +145,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
           // Chú thích
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             child: TextField(
               controller: _captionController,
-              decoration: const InputDecoration(
-                hintText: "Viết chú thích...",
+              decoration: InputDecoration(
+                hintText: tr('caption'),
                 border: OutlineInputBorder(),
               ),
               maxLines: 3,

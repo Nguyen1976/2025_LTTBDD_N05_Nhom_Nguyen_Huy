@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instargram/searchdetails.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -46,7 +47,7 @@ class _SearchState extends State<Search> {
                   );
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: tr('search'),
                   prefixIcon: const Icon(Icons.search),
                   contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
                   filled: true,

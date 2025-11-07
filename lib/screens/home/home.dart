@@ -70,10 +70,11 @@ class _HomeState extends State<Home> {
                         ),
                       );
                     },
-                    child: Icon(
-                      Icons.favorite_border,
-                      color: Colors.black,
-                      size: iconSize + 4,
+                    child: Image.network(
+                      "https://img.icons8.com/ios/50/like--v1.png",
+                      fit: BoxFit.cover,
+                      width: iconSize,
+                      height: iconSize,
                     ),
                   ),
                 ),

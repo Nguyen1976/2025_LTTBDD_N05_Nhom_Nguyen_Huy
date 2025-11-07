@@ -163,13 +163,19 @@ class _PostWidgetState extends State<PostWidget> {
                       child: Row(
                         children: [
                           _buildIconWithCount(
-                            icon: Icon(
-                              post.isLiked
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined,
-                              color: post.isLiked ? Colors.red : Colors.black,
-                              size: iconSize,
-                            ),
+                            icon: post.isLiked
+                                ? Image.network(
+                                    "https://img.icons8.com/ios/50/like--v1.png",
+                                    fit: BoxFit.cover,
+                                    width: iconSize,
+                                    height: iconSize,
+                                  )
+                                : (Image.network(
+                                    "https://img.icons8.com/ios-glyphs/30/FA5252/like--v1.png",
+                                    fit: BoxFit.cover,
+                                    width: iconSize,
+                                    height: iconSize,
+                                  )),
                             count: post.likeCount,
                             onTap: () {
                               setState(() {
@@ -196,8 +202,8 @@ class _PostWidgetState extends State<PostWidget> {
                           ),
                           const SizedBox(width: 10),
                           _buildIconWithCount(
-                            icon: Image.asset(
-                              'images/retweet.png',
+                            icon: Image.network(
+                              'https://img.icons8.com/sf-ultralight/25/retweet.png',
                               width: iconSize,
                               height: iconSize,
                             ),

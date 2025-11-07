@@ -55,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 child: Text(
                   "Password Recovery",
                   style: TextStyle(
-                    color: Color(0xFF273671),
+                    color: Colors.blue,
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -77,38 +77,40 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   key: _formkey,
                   child: Column(
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 30.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'validator_required_email'.tr();
-                            }
-                            return null;
-                          },
-                          controller: mailcontroller,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Email",
-                            hintStyle: TextStyle(
-                              color: Color(0xFFb2b7bf),
-                              fontSize: 18.0,
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'validator_required_email'.tr();
+                          }
+                          return null;
+                        },
+                        controller: mailcontroller,
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 18.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
                             ),
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: Color(0xFFb2b7bf),
-                              size: 26.0,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade300,
+                              width: 1,
                             ),
                           ),
                         ),
                       ),
+
                       SizedBox(height: 30.0),
                       GestureDetector(
                         onTap: () {
@@ -120,22 +122,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           }
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 13.0,
-                            horizontal: 30.0,
-                          ),
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
                           decoration: BoxDecoration(
-                            color: Color(0xFF273671),
+                            color: const Color(0xFF1677FF),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
                             child: Text(
-                              "Send Email",
+                              'Send Mail',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),

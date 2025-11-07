@@ -217,7 +217,7 @@ class _NotificationPageState extends State<NotificationPage> {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           ),
-          child: const Text('Theo dõi'),
+          child: const Text('Theo dõi', style: TextStyle(color: Colors.white)),
         ),
       );
     }).toList();

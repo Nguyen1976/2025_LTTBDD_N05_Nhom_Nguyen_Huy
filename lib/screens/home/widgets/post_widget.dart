@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:instargram/models/post.dart';
 import 'package:instargram/screens/home/widgets/comment_sheet.dart';
@@ -232,9 +233,7 @@ class _PostWidgetState extends State<PostWidget> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            post.isBookmarked
-                                ? 'Đã lưu vào bộ sưu tập'
-                                : 'Đã xoá khỏi bộ sưu tập',
+                            post.isBookmarked ? tr('mark') : tr('unmark'),
                           ),
                           duration: const Duration(seconds: 2),
                         ),

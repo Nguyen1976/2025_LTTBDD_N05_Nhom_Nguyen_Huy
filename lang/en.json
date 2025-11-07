@@ -40,5 +40,20 @@
   "group_info_title": "Group info",
   "logout": "Log out",
   "already_have_account": "Already have an account?",
-  "sign_in": "Sign In"
+  "sign_in": "Sign In",
+  "search": "Search",
+  "cancel": "Cancel",
+  "recently_search": "Recently Search",
+  "create_post": "Create New Post",
+  "share": "Share",
+  "select_img": "Select images below",
+  "caption": "Write captions...",
+  "comment": "Comments",
+  "cmt_input": "Write comment...",
+  "time_created": "now",
+  "mark": "Saved to collection",
+  "unmark": "Removed from collection",
+  "suggest": "Suggestion",
+  "show": "Show more",
+  "hide": "Hide"
 }

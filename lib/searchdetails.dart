@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SearchDetails extends StatefulWidget {
   const SearchDetails({super.key});
@@ -23,7 +24,7 @@ class _SearchDetailsState extends State<SearchDetails> {
                     child: TextField(
                       autofocus: true,
                       decoration: InputDecoration(
-                        hintText: 'Search',
+                        hintText: tr('search'),
                         prefixIcon: const Icon(Icons.search),
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: 10.0,
@@ -43,8 +44,8 @@ class _SearchDetailsState extends State<SearchDetails> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const Text(
-                      "Cancel",
+                    child: Text(
+                      tr('cancel'),
                       style: TextStyle(fontSize: 16, color: Colors.blue),
                     ),
                   ),
@@ -53,12 +54,12 @@ class _SearchDetailsState extends State<SearchDetails> {
             ),
             const SizedBox(height: 10),
             // Recently Search
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Recently Search",
+                  tr('recently_search'),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),

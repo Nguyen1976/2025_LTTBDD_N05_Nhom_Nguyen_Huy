@@ -98,40 +98,6 @@ class Intro extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              Expanded(
-                child: Card(
-                  color: Colors.white,
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'assignments'.tr(),
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        for (final m in members) ...[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text(
-                              '${m['name']} — ${m['role']}',
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          ),
-                          const Divider(height: 1),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 12),
-
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(

@@ -131,7 +131,7 @@ class _NotificationPageState extends State<NotificationPage> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         ),
-        child: Text(tr('btn_follow'), selectionColor: Colors.white),
+        child: Text(tr('btn_follow'), style: TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -178,7 +178,7 @@ class _NotificationPageState extends State<NotificationPage> {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           ),
-          child: const Text('Theo dõi', style: TextStyle(color: Colors.white)),
+          child: Text(tr('btn_follow'), style: TextStyle(color: Colors.white)),
         ),
       );
     }).toList();

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:instargram/bottomnav.dart';
 import 'package:instargram/screens/home/home.dart';
 import 'package:instargram/service/database.dart';
 
@@ -48,7 +49,7 @@ class AuthMethods {
         ) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Home()),
+            MaterialPageRoute(builder: (context) => BottomNav()),
           );
         });
       }
